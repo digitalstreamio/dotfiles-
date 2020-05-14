@@ -249,6 +249,6 @@ bindsym $mod+Shift+e mode "$mode_system"
         resume 'swaymsg "output * dpms on"' \
         before-sleep 'exec $lock' \
         after-resume 'swaymsg "output * dpms on"' 
-    exec --no-startup-id mako
-    exec --no-startup-id redshift -c ~/.config/redshift/config
+    #exec --no-startup-id mako
+    #exec --no-startup-id redshift -c ~/.config/redshift/config
     exec_always ~/.config/waybar/waybar.sh
