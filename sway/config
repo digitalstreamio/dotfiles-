@@ -82,12 +82,12 @@ output * bg $background fill
     bindsym $mod+b splith
     bindsym $mod+v splitv
 
-    bindsym $mod+f fullscreen toggle
-    bindsym $mod+Shift+f floating toggle
-    
     bindsym $mod+s scratchpad show
     bindsym $mod+Shift+s move scratchpad
 
+    bindsym $mod+f fullscreen toggle
+    bindsym $mod+Shift+f floating toggle
+    
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+t focus mode_toggle
 
