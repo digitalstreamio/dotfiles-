@@ -7,7 +7,6 @@ set -gx TERM xterm-color
 # cli
 alias cat='bat'
 alias help='tldr'
-alias ping='prettyping --nolegend'
 alias pv="fzf --preview 'bat --color \"always\" {}'"
 
 # journalctl
@@ -17,4 +16,3 @@ alias jnc='journalctl CONTAINER_NAME='
 
 # systemctl
 alias sd='systemctl'
-alias sdstat='systemctl status'
