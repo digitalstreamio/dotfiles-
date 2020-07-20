@@ -1,0 +1,16 @@
+{
+    "breadcrumbs.enabled": false,
+    "editor.fontFamily": "DejaVu Sans Mono",
+    "editor.lineHeight": 17,
+    "editor.minimap.enabled": false,
+    "editor.renderIndentGuides": false,
+    "rust-analyzer.highlightingOn": true,
+    "window.titleBarStyle": "custom",
+    "workbench.activityBar.visible": false,
+    "workbench.colorTheme": "Pale Fire",
+    "dart.flutterSdkPath": "/home/raytracer/sdk/flutter",
+    "workbench.editor.showTabs": true,
+    "python.dataScience.askForKernelRestart": false,
+    "extensions.ignoreRecommendations": false,
+    "python.dataScience.sendSelectionToInteractiveWindow": true,
+}
