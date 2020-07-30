@@ -66,27 +66,22 @@ output * bg $background fill
 # Basic
 
     bindsym $mod+q exec $menu   
-    bindsym $mod+grave exec $term
-    bindsym $mod+Return exec $term
-    bindsym $mod+Shift+c reload    
-    
     bindsym $mod+Shift+q kill
-    bindsym Alt+F4 kill
-
-    #bindsym $mod+Shift+e exit
+    bindsym $mod+Shift+c reload    
 
 # Layout
 
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split   
+
     bindsym $mod+b splith
     bindsym $mod+v splitv
 
-    bindsym $mod+s scratchpad show
-    bindsym $mod+Shift+s move scratchpad
-
     bindsym $mod+f fullscreen toggle
     bindsym $mod+Shift+f floating toggle
+
+    bindsym $mod+s scratchpad show
+    bindsym $mod+Shift+s move scratchpad
     
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+t focus mode_toggle
@@ -103,10 +98,10 @@ output * bg $background fill
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
 
+    bindsym $mod+a focus parent
+
     bindsym Alt+Tab focus right
     bindsym Alt+Shift+Tab focus left
-
-    bindsym $mod+a focus parent
 
 # Modes
 
@@ -211,6 +206,8 @@ bindsym $mod+Shift+e mode "$mode_system"
     
 # Shortcuts
 
+    bindsym $mod+Return exec $term
+
     bindsym $mod+Print exec $screenshot
     bindsym $mod+Shift+Print exec $screenclip
 
@@ -245,6 +242,4 @@ bindsym $mod+Shift+e mode "$mode_system"
         resume 'swaymsg "output * dpms on"' \
         before-sleep 'exec $lock' \
         after-resume 'swaymsg "output * dpms on"' 
-    #exec --no-startup-id mako
-    #exec --no-startup-id redshift -c ~/.config/redshift/config
     exec_always ~/.config/waybar/waybar.sh

@@ -8,11 +8,5 @@ set -gx TERM xterm-color
 alias cat='bat'
 alias help='tldr'
 alias pv="fzf --preview 'bat --color \"always\" {}'"
-
-# journalctl
 alias jn='journalctl'
-alias jnu='journalctl -u'
-alias jnc='journalctl CONTAINER_NAME='
-
-# systemctl
 alias sd='systemctl'
