@@ -186,25 +186,24 @@ bindsym $mod+Shift+e mode "$mode_system"
     
 # Window Mods
 
-	#for_window [window_role="bubble"] floating enable
 	#for_window [window_role="page-info"] floating enable
-	#for_window [window_role="pop-up"] floating enable
-	#for_window [window_role="task_dialog"] floating enable
-
-	for_window [window_role="File Operation Progress"] floating enable sticky
-	for_window [window_role="Open Files"] floating enable sticky
-	for_window [window_role="Save As"] floating enable
-	for_window [window_role="Preferences"] floating enable
-
-	#for_window [window_type="dialog"] floating enable
-	#for_window [window_type="menu"] floating enable
+	#for_window [instance="sun-awt-X11-XWindowPeer"] floating enable
+	#for_window [class="info|Mate-color-select|gcolor2|timesup|QtPass|GtkFileChooserDialog"] sticky enable
 
     for_window [app_id="org.gnome.Nautilus"] floating enable
-	#for_window [instance="sun-awt-X11-XWindowPeer"] floating enable
 
-	#for_window [class="info|Mate-color-select|gcolor2|timesup|QtPass|GtkFileChooserDialog"] sticky enable
 	for_window [instance="file_progress"] sticky enable
-    
+
+    for_window [window_role="bubble|page-info|Preferences|pop-up|task_dialog"] floating enable
+
+    for_window [window_role="Open Files"] floating enable sticky
+    for_window [window_role="File Operation Progress"] floating enable sticky
+    for_window [window_role="Save As"] floating enable
+    for_window [window_role="Preferences"] floating enable
+
+    for_window [window_type="dialog"] floating enable
+    for_window [window_type="menu"] floating enable
+
 # Shortcuts
 
     bindsym $mod+Return exec $term
