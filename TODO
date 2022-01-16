@@ -1,2 +1,3 @@
 - arch: secure boot 
-- arch: dracut-hook-uefi-systemd
+- arch: dracut-hook-uefi
+- arch: fix config-user

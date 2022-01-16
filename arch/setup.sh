@@ -45,6 +45,7 @@ sys_packages=(
 	mc
 	mdcat
 	micro
+	nmap
 	powertop
 	ripgrep
 	rsync
@@ -90,7 +91,7 @@ desktop_packages=(
 	# desktop / shell
 	sway
 	swayidle
-	
+	swaylock
 	waybar
 	wofi
 	rofi
@@ -116,9 +117,10 @@ desktop_packages=(
 )
 
 aur_packages=(
-	sway-systemd
-	swaylock-effects
+	corrupter-bin
 	greetd
+	sway-systemd
+	todotxt
 )
 
 apps=(
@@ -174,7 +176,7 @@ services=(
 	systemd-resolved.service
 	systemd-timesyncd.service
 	# desktop
-	cups.service
+	cupsd.service
 	greetd.service
 	# timers
 	fstrim.timer
@@ -199,18 +201,19 @@ install_apps() {
 }
 
 install_aur() {
-	for pkg in "${aur_packages[@]}"; do
-		if [[ -n "$SUDO_USER" ]]; then
-			sudo -u "$SUDO_USER" bash <<-'EOF'
-			set -xeuo pipefail
-			BUILDDIR=$(mktemp -d --tmpdir aur.XXXXXXXX)
-			cd "$BUILDDIR"
-			git clone --depth=1 "https://aur.archlinux.org/$pkg"
-			cd $pkg
-			makepkg --noconfirm --nocheck -csi
-			EOF
-		fi
-	done
+	if [[ -n "$SUDO_USER" ]]; then
+		sudo -u "$SUDO_USER" bash <<-'EOF'
+		set -xeuo pipefail
+		BUILDDIR=$(mktemp -d --tmpdir aur.XXXXXXXX)
+		cd "$BUILDDIR"
+		git clone --depth=1 "https://aur.archlinux.org/paru-bin"
+		cd paru-bin
+		makepkg --noconfirm --nocheck -csi
+		EOF
+	fi
+	if [[ -n "$SUDO_USER" ]]; then
+		sudo -u "$SUDO_USER" --preserve-env=AUR_PAGER,PACKAGER paru -S "${aur_packages[@]}"
+	fi
 }
 
 install_user() {
@@ -221,15 +224,11 @@ install_user() {
 
 config_system() {
 	for config in "${configs[@]}"; do
-		if [[ -e "$config" ]]; then
-			install -pm644 "$DIR/$config" /$config
-		fi
+		install -Dpm644 "$DIR/$config" /$config
 	done
 
 	for script in "${scripts[@]}"; do
-		if [[ -e "$script" ]]; then
-			install -pm755 "$DIR/$script" /usr/local/$script
-		fi
+		install -pm755 "$DIR/$script" /usr/local/$script
 	done
 
 	systemctl daemon-reload
