@@ -1,0 +1,2 @@
+- arch: secure boot 
+- arch: dracut-hook-uefi-systemd

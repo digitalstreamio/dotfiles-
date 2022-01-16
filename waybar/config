@@ -5,7 +5,8 @@
 
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["tray", "custom/spotify", "custom/weather", "custom/mail", "custom/storage", "backlight", "pulseaudio", "network", "idle_inhibitor", "battery", "clock"],
+    "modules-right": ["tray", "custom/weather", "pulseaudio", "backlight",  "network", "idle_inhibitor", "temperature", "battery", "clock"],
+
     "sway/mode": {
         "format": " {}"
     },
@@ -17,22 +18,52 @@
         "max-length": 80,
         "tooltip": false
     },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },    
+    "tray": {
+        "icon-size": 18
+    },    
     "clock": {
-        "format": "{:%a %d %b %H:%M}",
+        "format": "{:%a %H:%M}",
         "tooltip": false
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "temperature": {
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""],
+        "critical-threshold": 80
+    },
+    "backlight": {
+        "format": "{icon}",
+        "format-alt": "{percent}% {icon}",
+        "format-alt-click": "click-right",
+        "format-icons": ["", ""],
+        "on-scroll-down": "light -A 1",
+        "on-scroll-up": "light -U 1"
     },
     "battery": {
-        "format": "{capacity}% {icon}",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""],
-        "format-charging": "{capacity}% ",
-        "interval": 30,
         "states": {
-            "warning": 25,
+            "warning": 20,
             "critical": 10
         },
-        "tooltip": false
-    },
+        "format": "{capacity}% {icon}",
+        "format-alt": "{time} {icon}",
+        "format-alt-click": "click-right",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-icons": ["", "", "", "", ""]
+    },   
     "network": {
         "format": "{icon}",
         "format-alt": "{ipaddr}/{cidr} {icon}",
@@ -42,17 +73,21 @@
             "ethernet": [""],
             "disconnected": [""]
         },
-        "on-click": "termite -e nmtui",
-    "tooltip": false
-    },
+        "tooltip": false
+    },         
     "pulseaudio": {
         "format": "{icon}",
-        "format-alt": "{volume} {icon}",
+        "format-alt": "{volume}% {icon}",
         "format-alt-click": "click-right",
         "format-muted": "",
         "format-icons": {
-            "phone": [" ", " ", " ", " "],
-            "default": ["", "", "", ""]
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
         },
         "scroll-step": 10,
         "on-click": "pavucontrol",
@@ -66,14 +101,7 @@
         "interval": 60,
         "exec": "~/.config/waybar/modules/storage.sh"
     },
-    "backlight": {
-        "format": "{icon}",
-        "format-alt": "{percent}% {icon}",
-        "format-alt-click": "click-right",
-        "format-icons": ["", ""],
-        "on-scroll-down": "light -A 1",
-        "on-scroll-up": "light -U 1"
-    },
+ 
     "custom/weather": {
         "format": "{}",
         "format-alt": "{alt}: {}",
@@ -82,22 +110,5 @@
         "return-type": "json",
         "exec": "~/.config/waybar/modules/weather.sh",
         "exec-if": "ping wttr.in -c1"
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        },
-        "tooltip": false
-    },
-    "custom/test": {
-        "format": "{}",
-        "exec": "/tmp/test blub",
-        "param": "blah",
-        "interval": 5
-    },
-    "tray": {
-        "icon-size": 18
     }
 }

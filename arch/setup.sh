@@ -23,7 +23,6 @@ sys_packages=(
 	btrfs-progs 
 	dracut 
 	efibootmgr 
-	nano 
 	sudo
 	# sys / servcies
 	firewalld
@@ -82,23 +81,22 @@ dev_packages=(
 
 desktop_packages=(
 	# desktop / assets
-	arc-gtk-theme
-	papirus-icon-theme
 	ttf-caladea
 	ttf-carlito
 	ttf-dejavu
 	ttf-droid
+	ttf-font-awesome
 	ttf-liberation
 	# desktop / shell
 	sway
 	swayidle
-	swaylock
-	rofi
+	
 	waybar
 	wofi
+	rofi
+	mako
 	# desktop / services
 	cups
-	mako
 	pipewire-pulse
 	wireplumber
 	xorg-xwayland
@@ -107,6 +105,7 @@ desktop_packages=(
 	dconf-editor
 	flatpak
 	gnome-keyring
+	grim
 	light
 	pcmanfm-gtk3
 	wl-clipboard
@@ -117,10 +116,9 @@ desktop_packages=(
 )
 
 aur_packages=(
-	corrupter-git
-	greetd
 	sway-systemd
-	ttf-font-awesome-4	
+	swaylock-effects
+	greetd
 )
 
 apps=(
@@ -142,7 +140,6 @@ apps=(
 	# emulators
 	net.fsuae.FS-UAE
 	net.sf.VICE
-	org.DolphinEmu.dolphin-emu
 	# dev
 	com.google.AndroidStudio
 	com.jetbrains.IntelliJ-IDEA-Community
@@ -202,19 +199,18 @@ install_apps() {
 }
 
 install_aur() {
-	if [[ -n "$SUDO_USER" ]] && ! command -v paru &> /dev/null; then
-		sudo -u "$SUDO_USER" bash <<-'EOF'
-		set -xeuo pipefail
-		BUILD_DIR="$(mktemp -d --tmpdir paru-bin.XXXXXXXX)"
-		cd "$BUILD_DIR"
-		git clone --depth=1 "https://aur.archlinux.org/paru-bin"
-		cd paru-bin
-		makepkg --noconfirm --nocheck -rsi
-		EOF
-	fi
-	if [[ -n "$SUDO_USER" ]]; then
-		sudo -u "$SUDO_USER" --preserve-env=AUR_PAGER,PACKAGER paru -S "${aur_packages[@]}"
-	fi
+	for pkg in "${aur_packages[@]}"; do
+		if [[ -n "$SUDO_USER" ]]; then
+			sudo -u "$SUDO_USER" bash <<-'EOF'
+			set -xeuo pipefail
+			BUILDDIR=$(mktemp -d --tmpdir aur.XXXXXXXX)
+			cd "$BUILDDIR"
+			git clone --depth=1 "https://aur.archlinux.org/$pkg"
+			cd $pkg
+			makepkg --noconfirm --nocheck -csi
+			EOF
+		fi
+	done
 }
 
 install_user() {
@@ -255,7 +251,7 @@ config_user() {
 }
 
 main() {
-	case "${1}" in
+	case "$1" in
 		all)
 			install_packages
 			install_apps
@@ -264,24 +260,26 @@ main() {
 			config_system
 			config_user
 			;;
-		install-packages) install_packages;;
-		install-apps) install_apps;;
-		install-aur) install_aur;;
-		install-user) install_user;;
-		config-system) config_system;;
-		config-user) config_user;;
+		install-packages)
+			install_packages ;;
+		install-apps) 
+			install_apps ;;
+		install-aur) 
+			install_aur ;;
+		install-user) 
+			install_user ;;
+		config-system) 
+			config_system ;;
+		config-user) 
+			config_user ;;
 		pkg-sys) 
-			pacman -Syu --needed "${sys_packages[@]}"
-			;;
+			pacman -Syu --needed "${sys_packages[@]}" ;;
 		pkg-dev)
-			pacman -Syu --needed "${dev_packages[@]}"
-			;;
+			pacman -Syu --needed "${dev_packages[@]}" ;;
 		pkg-desktop)
-			pacman -Syu --needed "${desktop_packages[@]}"
-			;;
+			pacman -Syu --needed "${desktop_packages[@]}" ;;
 		*) 
-			echo "Invalid action ${1}!"; exit 1
-			;;
+			echo "Invalid action ${1}!"; exit 1 ;;
 	esac
 }
 

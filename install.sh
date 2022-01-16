@@ -3,10 +3,10 @@ cp -r * ~/.config/
 cp .profile ~/.profile
 
 usermod -s /usr/bin/fish $USER
-curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
-fisher add jethrokuan/z
-fisher add jethrokuan/fzf
-fisher add edc/bass
+#curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+#fisher add jethrokuan/z
+#fisher add jethrokuan/fzf
+#fisher add edc/bass
 
 flatpak override com.visualstudio.code --user \
     --env=ANDROID_SDK_ROOT=$HOME/sdk/android \
