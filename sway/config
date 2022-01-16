@@ -2,4 +2,5 @@
 # Based on config from rbnis
 # https://github.com/rbnis/dotfiles/blob/master/.config/sway/config
 
-include $HOME/.config/sway/sway.d/*.conf
+include /etc/sway/config.d/*.conf
+include $HOME/.config/sway/config.d/*.conf
