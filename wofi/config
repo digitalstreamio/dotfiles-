@@ -1,12 +1,2 @@
 width=600
-mode=drun
 colors=colors
-stylesheet=styles.css
-allow_images=true
-allow_markup=true
-dmenu-parse_action=true
-drun-display_generic=true
-filter_rate=100
-insensitive=true
-matching=contains
-term=alacritty

@@ -2,5 +2,5 @@
 # Based on config from rbnis
 # https://github.com/rbnis/dotfiles/blob/master/.config/sway/config
 
-include /etc/sway/config.d/*.conf
+include /etc/sway/config.d/10-systemd-session.conf
 include $HOME/.config/sway/config.d/*.conf

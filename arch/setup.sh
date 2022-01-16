@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xeuo pipefail
+set -euxo pipefail
 
 if [[ $EUID != 0 ]]; then
 	echo 'Elevating privileges'
@@ -34,7 +34,6 @@ sys_packages=(
 	curl
 	fish
 	fzf
-	hexyl
 	htop
 	iotop
 	jq
@@ -46,14 +45,14 @@ sys_packages=(
 	mdcat
 	micro
 	nmap
+	pacman-contrib
+	pkgfile
 	powertop
 	ripgrep
 	rsync
 	tldr
 	w3m
 	zstd
-	pacman-contrib
-	pkgfile
 )
 
 dev_packages=(
@@ -202,15 +201,13 @@ install_apps() {
 install_aur() {
 	if [[ -n "$SUDO_USER" ]]; then
 		sudo -u "$SUDO_USER" bash <<-'EOF'
-		set -xeuo pipefail
+		set -euxo pipefail
 		BUILDDIR=$(mktemp -d --tmpdir aur.XXXXXXXX)
 		cd "$BUILDDIR"
 		git clone --depth=1 "https://aur.archlinux.org/paru-bin"
 		cd paru-bin
 		makepkg --noconfirm --nocheck -csi
 		EOF
-	fi
-	if [[ -n "$SUDO_USER" ]]; then
 		sudo -u "$SUDO_USER" --preserve-env=AUR_PAGER,PACKAGER paru -S "${aur_packages[@]}"
 	fi
 }
