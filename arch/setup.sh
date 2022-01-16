@@ -4,7 +4,7 @@ set -xeuo pipefail
 
 if [[ $EUID != 0 ]]; then
 	echo 'Elevating privileges'
-	exec sudo --preserve-env=AUR_PAGER,PACKAGER "$0" "$@"
+	exec sudo --preserve-env=AUR_PAGER,PACKAGER,DBUS_SESSION_BUS_ADDRESS "$0" "$@"
 fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -244,7 +244,7 @@ config_system() {
 config_user() {
 	if [[ -n "$SUDO_USER" ]]; then
 		for service in "${user_services[@]}"; do
-			sudo -u "$SUDO_USER" systemctl --user enable $service
+			sudo -u "$SUDO_USER" --preserve-env=DBUS_SESSION_BUS_ADDRESS systemctl --user enable $service
 		done
 	fi
 }
@@ -254,8 +254,8 @@ main() {
 		all)
 			install_packages
 			install_apps
-			install_aur
 			install_user
+			install_aur
 			config_system
 			config_user
 			;;
