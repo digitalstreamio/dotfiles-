@@ -94,7 +94,6 @@ desktop_packages=(
 	swaylock
 	waybar
 	wofi
-	rofi
 	mako
 	# desktop / services
 	cups

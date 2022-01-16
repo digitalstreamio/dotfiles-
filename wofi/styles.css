@@ -1,0 +1,32 @@
+#window {
+  background-color: rgba(--wofi-rgb-color1, 0.94);
+  border: 3px solid rgba(--wofi-rgb-color1, 0.94);
+  font-family: Sans;
+  font-size: 18px;
+}
+
+#inner-box {
+  margin: 2px;
+}
+
+#outer-box {
+  background-color: rgba(45, 45, 45, 0.9);
+  padding: 5px;
+}
+
+#input {
+  background-color: transparent;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  margin: 3px;
+  padding: 3px;
+}
+
+#input image:first-child {
+  margin-left: 3px;
+}
+
+#input image:last-child {
+  margin-right: 3px;
+}
