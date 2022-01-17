@@ -108,12 +108,14 @@ dev_packages=(
 	fabric
 	helm
 	minikube
+	monit
 	kompose
 	kubectl
 	podman
 	podman-docker
 	toolbox
 	# dev / utils
+	python-decorator
 	tig
 	tokei
 )
@@ -139,6 +141,7 @@ apps=(
 	# office
 	org.libreoffice.LibreOffice
 	# utils
+	org.gnome.Calculator
 	org.gnome.Evince
 	org.gnome.eog
 	org.gnome.meld
@@ -151,6 +154,8 @@ apps=(
 	com.jetbrains.IntelliJ-IDEA-Community
 	com.visualstudio.code
 	org.freedesktop.Sdk.Extension.openjdk11//21.08
+	# sys / ext
+	org.gtk.Gtk3theme.Adwaita-dark
 )
 
 configs=(
@@ -182,8 +187,10 @@ services=(
 	fstrim.timer
 	paccache.timer
 	pkgfile-update.timer
+	# dev
+	monit
 	# desktop
-	cupsd.service
+	cups.service
 	greetd.service
 )
 
@@ -256,7 +263,12 @@ config_system() {
 	
 	systemctl start /dev/zram0
 	systemctl set-default graphical.target
+
 	timedatectl set-ntp true
+	ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+	mkdir -p /etc/monit.d
+	sudo sed -i -E 's+(#)?include /etc/monit.d/\*+include /etc/monit.d/\*+' /etc/monitrc
 }
 
 config_user() {

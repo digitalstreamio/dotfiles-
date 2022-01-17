@@ -70,8 +70,8 @@ echo "LANG=${NODE_LOCALE}" > /etc/locale.conf
 echo "KEYMAP=${NODE_KEYMAP}" > /etc/vconsole.conf; \
 echo "${NODE_LOCALE} UTF-8" >> /etc/locale.gen; \
 locale-gen; \
-hostnamectl set-hostname ${NODE_HOSTNAME}; \
-echo "127.0.1.1	${NODE_HOSTNAME}.localdomain	${NODE_HOSTNAME}" >> /etc/hosts
+echo "${NODE_HOSTNAME}" > /etc/hostname; \
+echo "127.0.1.1 ${NODE_HOSTNAME}.localdomain ${NODE_HOSTNAME}" >> /etc/hosts
 
 # Networking
 
