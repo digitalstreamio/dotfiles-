@@ -44,6 +44,7 @@ sys_packages=(
 	mc
 	mdcat
 	micro
+	ncdu
 	nmap
 	pacman-contrib
 	pkgfile
@@ -51,36 +52,14 @@ sys_packages=(
 	ripgrep
 	rsync
 	tldr
+	usbtools
 	w3m
 	zstd
 )
 
-dev_packages=(
-	# dev / base
-	base-devel 
-	git 
-	linux-headers 
-	linux-lts-headers
-	# dev / lang
-	jdk11-openjdk
-	python
-	rustup
-	# dev / ops
-	ansible
-	fabric
-	helm
-	minikube
-	kompose
-	kubectl
-	podman
-	toolbox
-	# dev / utils
-	tig
-	tokei
-)
-
-desktop_packages=(
+de_packages=(
 	# desktop / assets
+	gnome-themes-extra
 	ttf-caladea
 	ttf-carlito
 	ttf-dejavu
@@ -114,11 +93,38 @@ desktop_packages=(
 	xdg-utils
 )
 
+dev_packages=(
+	# dev / base
+	base-devel 
+	git 
+	linux-headers 
+	linux-lts-headers
+	# dev / lang
+	jdk11-openjdk
+	python
+	rustup
+	# dev / ops
+	ansible
+	fabric
+	helm
+	minikube
+	kompose
+	kubectl
+	podman
+	podman-docker
+	toolbox
+	# dev / utils
+	tig
+	tokei
+)
+
 aur_packages=(
+	# system
+	dracut-hook-uefi
+	# desktop
 	corrupter-bin
 	greetd
 	sway-systemd
-	todotxt
 )
 
 apps=(
@@ -154,7 +160,6 @@ configs=(
 	etc/sysctl.d/00-ansible.conf
 	etc/systemd/journald.conf.d/00-ansible.conf
 	etc/systemd/zram-generator.conf
-	etc/udev/rules.d/00-ansible.rules
 	# desktop
 	etc/greetd/config.toml
 	usr/lib/systemd/user/ssh-agent.service
@@ -173,13 +178,13 @@ services=(
 	systemd-networkd.service
 	systemd-resolved.service
 	systemd-timesyncd.service
-	# desktop
-	cupsd.service
-	greetd.service
-	# timers
+	# system timers
 	fstrim.timer
 	paccache.timer
 	pkgfile-update.timer
+	# desktop
+	cupsd.service
+	greetd.service
 )
 
 user_services=(
@@ -188,14 +193,30 @@ user_services=(
 	waybar.service
 )
 
+vscode_extensions=(
+    # langs
+    dart-code.flutter
+    ms-python.vscode-pylance
+    matklad.rust-analyzer
+    # tools
+    ms-azuretools.vscode-docker
+    eamodio.gitlens
+)
+
 install_packages() {
-	pacman -Syu --needed "${sys_packages[@]}" "${dev_packages[@]}" "${desktop_packages[@]}"
+	pacman -Syu --needed "${sys_packages[@]}" "${de_packages[@]}" "${dev_packages[@]}"
 }
 
 install_apps() {
 	flatpak install --or-update --noninteractive "${apps[@]}"
 	
 	flatpak override org.mozilla.firefox --socket=wayland --env=MOZ_ENABLE_WAYLAND=1
+
+	flatpak override com.visualstudio.code --user \
+		--env=ANDROID_SDK_ROOT=$HOME/sdk/android \
+		--env=JAVA_HOME=/usr/lib/sdk/openjdk11 \
+		--env=SHELL=/usr/bin/bash \
+		--env=PATH=/app/bin:/usr/bin:/usr/lib/sdk/openjdk11/bin:$HOME/.cargo/bin:$HOME/sdk/flutter/bin
 }
 
 install_aur() {
@@ -235,12 +256,23 @@ config_system() {
 	
 	systemctl start /dev/zram0
 	systemctl set-default graphical.target
+	timedatectl set-ntp true
 }
 
 config_user() {
 	if [[ -n "$SUDO_USER" ]]; then
 		for service in "${user_services[@]}"; do
 			sudo -u "$SUDO_USER" --preserve-env=DBUS_SESSION_BUS_ADDRESS systemctl --user enable $service
+		done
+
+		usermod -s /usr/bin/fish $USER
+
+		sudo -u "$SUDO_USER" bash <<-'EOF'
+		curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+		EOF
+
+		for ext in "${vscode_extensions[@]}"; do
+			sudo -u "$SUDO_USER" --preserve-env=DBUS_SESSION_BUS_ADDRESS com.visualstudio.code --install-extension $ext
 		done
 	fi
 }
@@ -269,10 +301,10 @@ main() {
 			config_user ;;
 		pkg-sys) 
 			pacman -Syu --needed "${sys_packages[@]}" ;;
+		pkg-desktop)
+			pacman -Syu --needed "${de_packages[@]}" ;;
 		pkg-dev)
 			pacman -Syu --needed "${dev_packages[@]}" ;;
-		pkg-desktop)
-			pacman -Syu --needed "${desktop_packages[@]}" ;;
 		*) 
 			echo "Invalid action ${1}!"; exit 1 ;;
 	esac

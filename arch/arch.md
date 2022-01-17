@@ -26,8 +26,8 @@ cryptsetup close container
 
 ## partition
 sgdisk --clear \
-    --new=1:0:+512MiB --typecode=1:ef00 --change-name=1:EFI \
-    --new=2:0:0       --typecode=2:8304 --change-name=2:cryptsystem \
+    --new=1:0:+1GiB --typecode=1:ef00 --change-name=1:EFI \
+    --new=2:0:0     --typecode=2:8304 --change-name=2:cryptsystem \
     ${NODE_INSTALL_DEV}
 
 ## format
@@ -60,17 +60,16 @@ genfstab -L -p /mnt >> /mnt/etc/fstab
 arch-chroot /mnt; \
 NODE_HOSTNAME=nova; \
 NODE_USER=raytracer; \
+NODE_TIMEZONE=America/New_York; \
 NODE_LOCALE=en_US.UTF-8; \
 NODE_KEYMAP=us; \
-NODE_TIMEZONE=America/New_York; \
-localectl set-locale LANG=${NODE_LOCALE}; \
-localectl set-keymap ${NODE_KEYMAP}; \
+NODE_NET_SSID=ssid; \
+ln -s "/usr/share/zoneinfo/${NODE_TIMEZONE}" /etc/localtime
+hwclock --systohc; \
+echo "LANG=${NODE_LOCALE}" > /etc/locale.conf
 echo "KEYMAP=${NODE_KEYMAP}" > /etc/vconsole.conf; \
 echo "${NODE_LOCALE} UTF-8" >> /etc/locale.gen; \
 locale-gen; \
-timedatectl set-ntp true; \
-timedatectl set-timezone ${NODE_TIMEZONE}; \
-hwclock --systohc; \
 hostnamectl set-hostname ${NODE_HOSTNAME}; \
 echo "127.0.1.1	${NODE_HOSTNAME}.localdomain	${NODE_HOSTNAME}" >> /etc/hosts
 
@@ -85,6 +84,14 @@ EOF
 systemctl enable systemd-networkd; \
 systemctl enable systemd-resolved; \
 systemctl enable sshd
+
+pacman -S iwd; \
+echo > /etc/iwd/main.conf >>EOF
+[General]
+EnableNetworkConfiguration=true
+EOF
+iwctl station wlan0 connect ${NODE_NET_SSID}; \
+systemctl enable iwd
 
 # User
 

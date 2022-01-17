@@ -1,2 +1,7 @@
-- arch: secure boot 
-- arch: dracut-hook-uefi
+- arch: secure boot
+- arch: swayidle
+- arch: gsettings
+
+fisher install jethrokuan/z
+fisher install jethrokuan/fzf
+fisher install edc/bass
