@@ -107,14 +107,17 @@ dev_packages=(
 	ansible
 	fabric
 	helm
-	minikube
 	monit
-	kompose
-	kubectl
 	podman
 	podman-docker
+	qemu
 	toolbox
+	#minikube
+	#kompose
+	#kubectl
 	# dev / utils
+	edk2-ovmf
+	edk2-shell
 	python-decorator
 	tig
 	tokei
@@ -153,9 +156,10 @@ apps=(
 	com.google.AndroidStudio
 	com.jetbrains.IntelliJ-IDEA-Community
 	com.visualstudio.code
-	org.freedesktop.Sdk.Extension.openjdk11//21.08
 	# sys / ext
 	org.gtk.Gtk3theme.Adwaita-dark
+	# dev /ext
+	org.freedesktop.Sdk.Extension.openjdk11//21.08
 )
 
 configs=(
@@ -218,16 +222,10 @@ install_apps() {
 	flatpak install --or-update --noninteractive "${apps[@]}"
 	
 	flatpak override org.mozilla.firefox --socket=wayland --env=MOZ_ENABLE_WAYLAND=1
-
-	flatpak override com.visualstudio.code --user \
-		--env=ANDROID_SDK_ROOT=$HOME/sdk/android \
-		--env=JAVA_HOME=/usr/lib/sdk/openjdk11 \
-		--env=SHELL=/usr/bin/bash \
-		--env=PATH=/app/bin:/usr/bin:/usr/lib/sdk/openjdk11/bin:$HOME/.cargo/bin:$HOME/sdk/flutter/bin
 }
 
 install_aur() {
-	if [[ -n "$SUDO_USER" ]]; then
+	if [[ -n "$SUDO_USER" ]] && ! command -v paru &> /dev/null; then
 		sudo -u "$SUDO_USER" bash <<-'EOF'
 		set -euxo pipefail
 		BUILDDIR=$(mktemp -d --tmpdir aur.XXXXXXXX)
@@ -236,12 +234,18 @@ install_aur() {
 		cd paru-bin
 		makepkg --noconfirm --nocheck -csi
 		EOF
+	fi
+	if [[ -n "$SUDO_USER" ]]; then
 		sudo -u "$SUDO_USER" --preserve-env=AUR_PAGER,PACKAGER paru -S "${aur_packages[@]}"
 	fi
 }
 
 install_user() {
 	if [[ -n "$SUDO_USER" ]]; then
+		sudo -u "$SUDO_USER" bash <<-'EOF'
+		curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+		EOF
+
 		sudo -u "$SUDO_USER" rustup toolchain install stable
 	fi
 }
@@ -258,15 +262,13 @@ config_system() {
 	systemctl daemon-reload
 	
 	for service in "${services[@]}"; do
-		systemctl enable $service
+		systemctl enable --now $service
 	done
 	
 	systemctl start /dev/zram0
 	systemctl set-default graphical.target
-
 	timedatectl set-ntp true
 	ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-
 	mkdir -p /etc/monit.d
 	sudo sed -i -E 's+(#)?include /etc/monit.d/\*+include /etc/monit.d/\*+' /etc/monitrc
 }
@@ -277,15 +279,11 @@ config_user() {
 			sudo -u "$SUDO_USER" --preserve-env=DBUS_SESSION_BUS_ADDRESS systemctl --user enable $service
 		done
 
-		usermod -s /usr/bin/fish $USER
-
-		sudo -u "$SUDO_USER" bash <<-'EOF'
-		curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
-		EOF
-
 		for ext in "${vscode_extensions[@]}"; do
 			sudo -u "$SUDO_USER" --preserve-env=DBUS_SESSION_BUS_ADDRESS com.visualstudio.code --install-extension $ext
 		done
+
+		usermod -s /usr/bin/fish $SUDO_USER
 	fi
 }
 

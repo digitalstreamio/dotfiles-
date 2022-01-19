@@ -9,4 +9,8 @@ cp .profile ~/.profile
 # lpadmin -p Canon-G6000 -E -v ipps://192.168.4.50 -m everywhere
 # gsettings set org.gnome.desktop.interface font-antialiasing rgba
 # gsettings set org.gnome.desktop.interface font-hinting slight
-
+# flatpak override com.visualstudio.code --user \
+#    --env=ANDROID_SDK_ROOT=$HOME/sdk/android \
+#    --env=JAVA_HOME=/usr/lib/sdk/openjdk11 \
+#    --env=SHELL=/usr/bin/bash \
+#    --env=PATH=/app/bin:/usr/bin:/usr/lib/sdk/openjdk11/bin:$HOME/.cargo/bin:$HOME/sdk/flutter/bin
