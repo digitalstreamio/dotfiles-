@@ -9,10 +9,10 @@ fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# base:		1530MB/128
-# sys:		380MB/+69
-# desktop:	714MB/+203
-# dev:		1678MB/+71
+# base:		1530MB/125
+# sys:		350MB/73
+# desktop:	620MB/206
+# dev:		1670MB/93
 
 sys_packages=(
 	# sys / base
@@ -52,7 +52,7 @@ sys_packages=(
 	ripgrep
 	rsync
 	tldr
-	usbtools
+	usbutils
 	w3m
 	zstd
 )
@@ -271,10 +271,10 @@ config_system() {
 	
 	systemctl start /dev/zram0
 	systemctl set-default graphical.target
+
 	timedatectl set-ntp true
+
 	ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-	mkdir -p /etc/monit.d
-	sudo sed -i -E 's+(#)?include /etc/monit.d/\*+include /etc/monit.d/\*+' /etc/monitrc
 }
 
 config_user() {
@@ -283,9 +283,11 @@ config_user() {
 			sudo -u "$SUDO_USER" --preserve-env=DBUS_SESSION_BUS_ADDRESS systemctl --user enable $service
 		done
 
-		for ext in "${vscode_extensions[@]}"; do
-			sudo -u "$SUDO_USER" --preserve-env=DBUS_SESSION_BUS_ADDRESS com.visualstudio.code --install-extension $ext
-		done
+		if command -v com.visualstudio.code &> /dev/null; then
+			for ext in "${vscode_extensions[@]}"; do
+				sudo -u "$SUDO_USER" --preserve-env=DBUS_SESSION_BUS_ADDRESS com.visualstudio.code --install-extension $ext
+			done
+		fi
 
 		usermod -s /usr/bin/fish $SUDO_USER
 	fi
@@ -315,7 +317,7 @@ main() {
 			config_user ;;
 		pkg-sys) 
 			pacman -Syu --needed "${sys_packages[@]}" ;;
-		pkg-desktop)
+		pkg-de)
 			pacman -Syu --needed "${de_packages[@]}" ;;
 		pkg-dev)
 			pacman -Syu --needed "${dev_packages[@]}" ;;

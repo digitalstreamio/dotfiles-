@@ -8,8 +8,9 @@ sgdisk --clear \
     --new=1:0:+512MiB --typecode=1:ef00 --change-name=1:EFI \
     --new=2:0:0       --typecode=2:8304 --change-name=2:system \
     ${NODE_INSTALL_DEV}; \
+sleep 1; \
 mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/EFI; \
-mkfs.btrfs -L system /dev/disk/by-partlabel/system; \
+mkfs.btrfs -f -L system /dev/disk/by-partlabel/system; \
 mount -t btrfs LABEL=system /mnt; \
 mkdir -p /mnt/boot; \
 mount /dev/disk/by-partlabel/EFI /mnt/boot
@@ -57,7 +58,8 @@ genfstab -L -p /mnt >> /mnt/etc/fstab
 
 # Configuration
 
-arch-chroot /mnt; \
+arch-chroot /mnt; 
+
 NODE_HOSTNAME=nova; \
 NODE_USER=raytracer; \
 NODE_TIMEZONE=America/New_York; \
