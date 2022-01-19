@@ -75,7 +75,7 @@ echo "127.0.1.1 ${NODE_HOSTNAME}.localdomain ${NODE_HOSTNAME}" >> /etc/hosts
 
 # Networking
 
-cat > /etc/systemd/network/10-wired.network <<EOF
+cat > /etc/systemd/network/wired.network <<EOF
 [Match]
 Name=en*
 [Network]

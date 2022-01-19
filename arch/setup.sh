@@ -168,6 +168,10 @@ configs=(
 	etc/modules-load.d/zram.conf
 	etc/sysctl.d/00-ansible.conf
 	etc/systemd/journald.conf.d/00-ansible.conf
+	etc/systemd/network/bind.network
+	etc/systemd/network/br0.netdev
+	etc/systemd/network/br0.network
+	etc/systemd/network/wired.network
 	etc/systemd/zram-generator.conf
 	# desktop
 	etc/greetd/config.toml
