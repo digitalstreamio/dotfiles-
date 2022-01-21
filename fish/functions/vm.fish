@@ -5,6 +5,7 @@ function vm
         -machine q35 \
         -bios /usr/share/edk2-ovmf/x64/OVMF.fd \
         -cpu host \
+        -smp 2 \
         -m 2048 \
         -nic bridge,br=br0,model=virtio-net-pci \
         -drive file=/data/vms/$name.qcow2,media=disk,if=virtio \

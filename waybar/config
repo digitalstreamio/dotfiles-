@@ -5,7 +5,7 @@
 
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["tray", "cpu", "memory", "custom/weather", "pulseaudio", "backlight",  "network", "idle_inhibitor", "temperature", "battery", "clock"],
+    "modules-right": ["tray", "custom/weather", "pulseaudio", "backlight",  "network", "idle_inhibitor", "cpu", "memory", "temperature", "battery", "clock"],
 
     "sway/mode": {
         "format": " {}"

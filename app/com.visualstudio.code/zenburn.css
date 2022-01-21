@@ -1,0 +1,31 @@
+/* Java */
+anot { color: rgb(128,128,128); }
+class { color: rgb(202,230,130); }
+deprecatedMember { color: rgb(255,255,255); }
+field { color: rgb(179,183,132); }
+interface { color: rgb(202,230,130); }
+localVariable { color: rgb(212,196,169); }
+localVariableDeclaration { color: rgb(212,196,169); }
+method { color: rgb(223,190,149); }
+methodDeclarationName { color: rgb(223,190,149); }
+number { color: rgb(138,204,207); }
+staticField { color: rgb(147,162,204); }
+staticFinalField { color: rgb(83,220,205); }
+staticMethodInvocation { color: rgb(196,196,183); }
+
+/* C */
+class { color: rgb(202,230,130); }
+enumerator { color: rgb(83,220,205); }
+externalSDK { color: rgb(196,196,183); }
+field { color: rgb(179,183,132); }
+fun { color: rgb(223,190,149); }
+functionDeclaration { color: rgb(223,190,149); }
+localVariable { color: rgb(212,196,169); }
+localVariableDeclaration { color: rgb(212,196,169); }
+macroDefinition { color: rgb(223,190,149); }
+method { color: rgb(223,190,149); }
+methodDeclaration { color: rgb(223,190,149); }
+namespace { color: rgb(202,230,130); }
+staticField { color: rgb(147,162,204); }
+staticMethod { color: rgb(196,196,183); }
+typedef { color: rgb(202,230,130); }

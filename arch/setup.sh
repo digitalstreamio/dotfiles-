@@ -74,6 +74,7 @@ de_packages=(
 	wofi
 	mako
 	# desktop / services
+	colord
 	cups
 	pipewire-pulse
 	wireplumber
@@ -82,6 +83,7 @@ de_packages=(
 	alacritty
 	dconf-editor
 	flatpak
+	ghostscript
 	gnome-keyring
 	grim
 	light
@@ -172,6 +174,7 @@ configs=(
 	etc/systemd/network/br0.netdev
 	etc/systemd/network/br0.network
 	etc/systemd/network/wired.network
+	etc/systemd/network/zerotier.network
 	etc/systemd/zram-generator.conf
 	# desktop
 	etc/greetd/config.toml
