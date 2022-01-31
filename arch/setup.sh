@@ -24,7 +24,7 @@ sys_packages=(
 	dracut 
 	efibootmgr 
 	sudo
-	# sys / servcies
+	# sys / services
 	firewalld
 	fwupd
 	openssh
@@ -49,9 +49,11 @@ sys_packages=(
 	pacman-contrib
 	pkgfile
 	powertop
+	reflector
 	ripgrep
 	rsync
 	tldr
+	unzip
 	usbutils
 	w3m
 	zstd
@@ -72,10 +74,10 @@ de_packages=(
 	swaylock
 	waybar
 	wofi
-	mako
 	# desktop / services
 	colord
 	cups
+	mako
 	pipewire-pulse
 	wireplumber
 	xorg-xwayland
@@ -174,7 +176,6 @@ configs=(
 	etc/systemd/network/br0.netdev
 	etc/systemd/network/br0.network
 	etc/systemd/network/wired.network
-	etc/systemd/network/zerotier.network
 	etc/systemd/zram-generator.conf
 	# desktop
 	etc/greetd/config.toml
@@ -198,11 +199,11 @@ services=(
 	fstrim.timer
 	paccache.timer
 	pkgfile-update.timer
-	# dev
-	monit
 	# desktop
 	cups.service
 	greetd.service
+	# dev
+	monit.service
 )
 
 user_services=(

@@ -1,3 +1,2 @@
 - arch: secure boot
 - arch: configure monitrc
-- arch: update archlinux-keyring
