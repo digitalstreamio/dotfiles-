@@ -28,6 +28,7 @@ sys_packages=(
 	firewalld
 	fwupd
 	openssh
+	udisks2
 	zram-generator
 	# sys / utils
 	bat
@@ -60,14 +61,6 @@ sys_packages=(
 )
 
 de_packages=(
-	# desktop / assets
-	gnome-themes-extra
-	ttf-caladea
-	ttf-carlito
-	ttf-dejavu
-	ttf-droid
-	ttf-font-awesome
-	ttf-liberation
 	# desktop / shell
 	sway
 	swayidle
@@ -95,6 +88,14 @@ de_packages=(
 	xdg-desktop-portal-wlr
 	xdg-user-dirs
 	xdg-utils
+	# desktop / assets
+	gnome-themes-extra
+	ttf-caladea
+	ttf-carlito
+	ttf-dejavu
+	ttf-droid
+	ttf-font-awesome
+	ttf-liberation
 )
 
 dev_packages=(
@@ -153,16 +154,16 @@ apps=(
 	org.gnome.eog
 	org.gnome.meld
 	org.keepassxc.KeePassXC
-	# emulators
-	net.fsuae.FS-UAE
-	net.sf.VICE
 	# dev
 	com.google.AndroidStudio
 	com.jetbrains.IntelliJ-IDEA-Community
 	com.visualstudio.code
-	# sys / ext
+	# emulators
+	net.fsuae.FS-UAE
+	net.sf.VICE
+	# ext / sys
 	org.gtk.Gtk3theme.Adwaita-dark
-	# dev /ext
+	# ext / dev
 	org.freedesktop.Sdk.Extension.openjdk11//21.08
 )
 
@@ -195,6 +196,7 @@ services=(
 	systemd-networkd.service
 	systemd-resolved.service
 	systemd-timesyncd.service
+	udisks2.service
 	# system timers
 	fstrim.timer
 	paccache.timer
@@ -218,6 +220,7 @@ vscode_extensions=(
     ms-python.vscode-pylance
     matklad.rust-analyzer
     # tools
+	redhat.ansible
     ms-azuretools.vscode-docker
     eamodio.gitlens
 )
