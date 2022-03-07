@@ -106,6 +106,7 @@ dev_packages=(
 	linux-lts-headers
 	# dev / lang
 	jdk11-openjdk
+	nodejs-lts-erbium
 	python
 	rustup
 	# dev / ops
@@ -116,6 +117,7 @@ dev_packages=(
 	podman
 	podman-docker
 	qemu
+	terraform
 	toolbox
 	#minikube
 	#kompose
@@ -167,7 +169,7 @@ apps=(
 	org.freedesktop.Sdk.Extension.openjdk11//21.08
 )
 
-configs=(
+sys_configs=(
 	# system
 	etc/ssh/sshd_config
 	etc/modules-load.d/zram.conf
@@ -185,11 +187,11 @@ configs=(
 	usr/lib/systemd/user/waybar.service
 )
 
-scripts=(
-	bin/sway-run.sh
+sys_scripts=(
+	sway-run.sh
 )
 
-services=(
+sys_services=(
 	# system
 	firewalld.service
 	sshd.service
@@ -223,6 +225,7 @@ vscode_extensions=(
 	redhat.ansible
     ms-azuretools.vscode-docker
     eamodio.gitlens
+	hashicorp.terraf
 )
 
 install_packages() {
@@ -231,8 +234,6 @@ install_packages() {
 
 install_apps() {
 	flatpak install --or-update --noninteractive "${apps[@]}"
-	
-	flatpak override org.mozilla.firefox --socket=wayland --env=MOZ_ENABLE_WAYLAND=1
 }
 
 install_aur() {
@@ -262,26 +263,29 @@ install_user() {
 }
 
 config_system() {
-	for config in "${configs[@]}"; do
+	for config in "${sys_configs[@]}"; do
 		install -Dpm644 "$DIR/$config" /$config
 	done
 
-	for script in "${scripts[@]}"; do
-		install -pm755 "$DIR/$script" /usr/local/$script
+	for script in "${sys_scripts[@]}"; do
+		install -pm755 "$DIR/$script" /usr/local/bin/$script
 	done
 
 	systemctl daemon-reload
 	
-	for service in "${services[@]}"; do
+	for service in "${sys_services[@]}"; do
 		systemctl enable --now $service
 	done
 	
 	systemctl start /dev/zram0
 	systemctl set-default graphical.target
-
 	timedatectl set-ntp true
 
 	ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+}
+
+config_apps() {
+	flatpak override org.mozilla.firefox --socket=wayland --env=MOZ_ENABLE_WAYLAND=1
 }
 
 config_user() {
@@ -308,6 +312,7 @@ main() {
 			install_user
 			install_aur
 			config_system
+			config_apps
 			config_user
 			;;
 		install-packages)
@@ -320,6 +325,8 @@ main() {
 			install_user ;;
 		config-system) 
 			config_system ;;
+		config-apps)
+			config_apps ;;
 		config-user) 
 			config_user ;;
 		pkg-sys) 

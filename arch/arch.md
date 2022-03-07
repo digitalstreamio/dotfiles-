@@ -1,13 +1,19 @@
 Arch Installation Guide
 =======================
 
+# Vars
+
+TARGET_DEV=/dev/vda; \
+export NODE_HOSTNAME=nova; \
+export NODE_USER=raytracer; \
+export NODE_NET_SSID=ssid
+
 # Disk Setup / Basic
 
-NODE_INSTALL_DEV=/dev/vda; \
 sgdisk --clear \
     --new=1:0:+512MiB --typecode=1:ef00 --change-name=1:EFI \
     --new=2:0:0       --typecode=2:8304 --change-name=2:system \
-    ${NODE_INSTALL_DEV}; \
+    ${TARGET_DEV}; \
 sleep 1; \
 mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/EFI; \
 mkfs.btrfs -f -L system /dev/disk/by-partlabel/system; \
@@ -17,11 +23,8 @@ mount /dev/disk/by-partlabel/EFI /mnt/boot
 
 # Disk Setup / Encrypted
 
-## vars
-NODE_INSTALL_DEV=/dev/vda
-
 ## erase
-cryptsetup open --type plain ${NODE_INSTALL_DEV} container --key-file /dev/urandom; \
+cryptsetup open --type plain ${TARGET_DEV} container --key-file /dev/urandom; \
 dd if=/dev/zero of=/dev/mapper/container status=progress bs=1M; \
 cryptsetup close container
 
@@ -29,7 +32,7 @@ cryptsetup close container
 sgdisk --clear \
     --new=1:0:+1GiB --typecode=1:ef00 --change-name=1:EFI \
     --new=2:0:0     --typecode=2:8304 --change-name=2:cryptsystem \
-    ${NODE_INSTALL_DEV}
+    ${TARGET_DEV}
 
 ## format
 cryptsetup luksFormat /dev/disk/by-partlabel/cryptsystem; \
@@ -52,7 +55,7 @@ mount /dev/disk/by-partlabel/EFI /mnt/boot
 
 # Installation
 
-reflector --country us --protocol https --latest 10 --sort rate --save /etc/pacman.d/mirrorlist; \
+reflector --country us --protocol https --latest 10 --sort score --save /etc/pacman.d/mirrorlist; \
 pacstrap /mnt base linux linux-lts linux-firmware btrfs-progs dracut efibootmgr openssh sudo; \
 genfstab -L -p /mnt >> /mnt/etc/fstab
 
@@ -60,17 +63,11 @@ genfstab -L -p /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt; 
 
-NODE_HOSTNAME=nova; \
-NODE_USER=raytracer; \
-NODE_TIMEZONE=America/New_York; \
-NODE_LOCALE=en_US.UTF-8; \
-NODE_KEYMAP=us; \
-NODE_NET_SSID=ssid; \
-ln -s "/usr/share/zoneinfo/${NODE_TIMEZONE}" /etc/localtime
+ln -s "/usr/share/zoneinfo/America/New_York" /etc/localtime
 hwclock --systohc; \
-echo "LANG=${NODE_LOCALE}" > /etc/locale.conf
-echo "KEYMAP=${NODE_KEYMAP}" > /etc/vconsole.conf; \
-echo "${NODE_LOCALE} UTF-8" >> /etc/locale.gen; \
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+echo "KEYMAP=us" > /etc/vconsole.conf; \
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen; \
 locale-gen; \
 echo "${NODE_HOSTNAME}" > /etc/hostname; \
 echo "127.0.1.1 ${NODE_HOSTNAME}.localdomain ${NODE_HOSTNAME}" >> /etc/hosts
