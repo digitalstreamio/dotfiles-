@@ -1,2 +1,4 @@
 window:
   opacity: 0.85
+env:
+  TERM: xterm-256color
