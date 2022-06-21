@@ -11,6 +11,5 @@
     "workbench.activityBar.visible": false,
     "workbench.colorTheme": "Pale Fire",
     "workbench.editor.showTabs": true,
-    "dart.flutterSdkPath": "/home/raytracer/sdk/flutter",
-    "python.showStartPage": false,
+    "dart.flutterSdkPath": "/home/raytracer/sdk/flutter"
 }
