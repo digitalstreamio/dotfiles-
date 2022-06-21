@@ -74,15 +74,16 @@ de_packages=(
 	pipewire-pulse
 	wireplumber
 	xorg-xwayland
-	# desktop / tools
+	# desktop / apps
 	alacritty
+	pcmanfm-gtk3
+	# desktop / utils
 	dconf-editor
 	flatpak
 	ghostscript
 	gnome-keyring
 	grim
 	light
-	pcmanfm-gtk3
 	wl-clipboard
 	xdg-desktop-portal-gtk
 	xdg-desktop-portal-wlr
@@ -102,22 +103,22 @@ dev_packages=(
 	# dev / base
 	base-devel 
 	git 
+	# dev / libs
 	linux-headers 
 	linux-lts-headers
-	# dev / lang
+	# dev / langs
 	jdk11-openjdk
 	nodejs-lts-erbium
 	python
-	rustup
+	#rustup
 	# dev / ops
 	ansible
 	fabric
-	helm
 	monit
 	podman
-	podman-docker
 	qemu
 	terraform
+	#helm
 	#toolbox
 	#minikube
 	#kompose
@@ -125,6 +126,9 @@ dev_packages=(
 	# dev / utils
 	edk2-ovmf
 	edk2-shell
+	git-delta
+	github-cli
+	podman-docker
 	python-decorator
 	tig
 	tokei
@@ -221,11 +225,12 @@ vscode_extensions=(
     dart-code.flutter
     ms-python.vscode-pylance
     matklad.rust-analyzer
-    # tools
+    # ops
 	redhat.ansible
     ms-azuretools.vscode-docker
-    eamodio.gitlens
 	hashicorp.terraf
+	# tools
+	eamodio.gitlens
 )
 
 install_packages() {
@@ -256,9 +261,8 @@ install_user() {
 	if [[ -n "$SUDO_USER" ]]; then
 		sudo -u "$SUDO_USER" bash <<-'EOF'
 		curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+		curl https://sh.rustup.rs -sSf | sh
 		EOF
-
-		sudo -u "$SUDO_USER" rustup toolchain install stable
 	fi
 }
 
@@ -286,6 +290,7 @@ config_system() {
 
 config_apps() {
 	flatpak override org.mozilla.firefox --socket=wayland --env=MOZ_ENABLE_WAYLAND=1
+	flatpak override com.visualstudio.code --socket=wayland --env=JAVA_HOME=/usr/lib/sdk/openjdk11 --env=SHELL=/usr/bin/bash
 }
 
 config_user() {
