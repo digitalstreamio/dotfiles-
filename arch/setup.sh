@@ -53,7 +53,7 @@ sys_packages=(
 	reflector
 	ripgrep
 	rsync
-	tldr
+	tealdeer
 	unzip
 	usbutils
 	w3m
