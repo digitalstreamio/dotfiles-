@@ -107,6 +107,7 @@ dev_packages=(
 	linux-headers 
 	linux-lts-headers
 	# dev / langs
+	clang
 	jdk11-openjdk
 	nodejs-lts-erbium
 	python
@@ -128,6 +129,7 @@ dev_packages=(
 	edk2-shell
 	git-delta
 	github-cli
+	ninja
 	podman-docker
 	python-decorator
 	tig
