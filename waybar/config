@@ -3,9 +3,9 @@
     "position": "top",
     "height": 30,
 
-    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/weather"],
     "modules-center": ["sway/window"],
-    "modules-right": ["tray", "custom/weather", "pulseaudio", "backlight",  "network", "idle_inhibitor", "cpu", "memory", "temperature", "battery", "clock"],
+    "modules-right": ["tray", "temperature", "battery", "network", "idle_inhibitor", "pulseaudio", "backlight",  "clock"],
 
     "sway/mode": {
         "format": " {}"

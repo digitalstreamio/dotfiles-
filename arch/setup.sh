@@ -109,6 +109,7 @@ dev_packages=(
 	# dev / langs
 	clang
 	jdk11-openjdk
+	jdk17-openjdk
 	nodejs-lts-erbium
 	python
 	#rustup
@@ -116,22 +117,26 @@ dev_packages=(
 	ansible
 	fabric
 	monit
+	libvirt
 	podman
-	qemu
+	qemu-desktop
 	terraform
 	#helm
 	#toolbox
-	#minikube
-	#kompose
-	#kubectl
+	minikube
+	kompose
+	kubectl
 	# dev / utils
+	dnsmasq
 	edk2-ovmf
 	edk2-shell
 	git-delta
 	github-cli
+	iptables-nft
 	ninja
 	podman-docker
 	python-decorator
+	python-poetry
 	tig
 	tokei
 )
