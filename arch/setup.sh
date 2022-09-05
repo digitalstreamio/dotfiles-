@@ -30,33 +30,39 @@ sys_packages=(
 	openssh
 	udisks2
 	zram-generator
+	# sys / tui
+	bandwhich
+	bottom
+	htop
+	iotop
+	lnav
+	mc
+	micro
+	ncdu
+	newsboat
+	powertop
+	w3m
+	weechat
 	# sys / utils
 	bat
 	curl
+	fd
 	fish
 	fzf
-	htop
-	iotop
+	glow
 	jq
-	lnav
 	lsof
+	iptables-nft
 	man-db
 	man-pages
-	mc
-	mdcat
-	micro
-	ncdu
-	nmap
 	pacman-contrib
 	pkgfile
-	powertop
 	reflector
 	ripgrep
 	rsync
 	tealdeer
 	unzip
 	usbutils
-	w3m
 	zstd
 )
 
@@ -68,8 +74,6 @@ de_packages=(
 	waybar
 	wofi
 	# desktop / services
-	colord
-	cups
 	mako
 	pipewire-pulse
 	wireplumber
@@ -78,6 +82,8 @@ de_packages=(
 	alacritty
 	pcmanfm-gtk3
 	# desktop / utils
+	colord
+	cups
 	dconf-editor
 	flatpak
 	ghostscript
@@ -103,14 +109,13 @@ dev_packages=(
 	# dev / base
 	base-devel 
 	git 
-	# dev / libs
 	linux-headers 
 	linux-lts-headers
 	# dev / langs
 	clang
 	jdk11-openjdk
 	jdk17-openjdk
-	nodejs-lts-erbium
+	nodejs-lts-fermium
 	python
 	#rustup
 	# dev / ops
@@ -121,8 +126,7 @@ dev_packages=(
 	podman
 	qemu-desktop
 	terraform
-	#helm
-	#toolbox
+	helm
 	minikube
 	kompose
 	kubectl
@@ -132,7 +136,7 @@ dev_packages=(
 	edk2-shell
 	git-delta
 	github-cli
-	iptables-nft
+	meson
 	ninja
 	podman-docker
 	python-decorator
@@ -190,6 +194,7 @@ sys_configs=(
 	etc/systemd/network/br0.netdev
 	etc/systemd/network/br0.network
 	etc/systemd/network/wired.network
+	etc/systemd/system/powertop.service
 	etc/systemd/zram-generator.conf
 	# desktop
 	etc/greetd/config.toml
@@ -199,23 +204,22 @@ sys_configs=(
 )
 
 sys_scripts=(
-	sway-run.sh
+	bin/sway-run.sh
 )
 
 sys_services=(
 	# system
 	firewalld.service
+	powertop.service
 	sshd.service
 	systemd-networkd.service
 	systemd-resolved.service
 	systemd-timesyncd.service
-	udisks2.service
 	# system timers
 	fstrim.timer
 	paccache.timer
 	pkgfile-update.timer
 	# desktop
-	cups.service
 	greetd.service
 	# dev
 	monit.service
@@ -231,13 +235,14 @@ vscode_extensions=(
     # langs
     dart-code.flutter
     ms-python.vscode-pylance
-    matklad.rust-analyzer
+    rust-lang.rust-analyzer
     # ops
 	redhat.ansible
     ms-azuretools.vscode-docker
-	hashicorp.terraf
+	HashiCorp.terraform
 	# tools
 	eamodio.gitlens
+	ms-python.black-formatter
 )
 
 install_packages() {
@@ -279,7 +284,7 @@ config_system() {
 	done
 
 	for script in "${sys_scripts[@]}"; do
-		install -pm755 "$DIR/$script" /usr/local/bin/$script
+		install -pm755 "$DIR/$script" /usr/local/$script
 	done
 
 	systemctl daemon-reload
