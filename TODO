@@ -1,2 +1,10 @@
 - arch: secure boot
 - arch: configure monitrc
+- minikube
+    - minikube config set driver kvm2
+    - usermod -aG libvirt $(whoami)
+    - mkdir .minikube
+    - chattr +C .minikube
+- data
+    - chattr +C /data
+- newsboat config

@@ -18,11 +18,12 @@ sys_packages=(
 	# sys / base
 	base 
 	linux 
-	linux-lts 
 	linux-firmware 
+	linux-lts 
 	btrfs-progs 
 	dracut 
 	efibootmgr 
+	iptables-nft
 	sudo
 	# sys / services
 	firewalld
@@ -30,40 +31,37 @@ sys_packages=(
 	openssh
 	udisks2
 	zram-generator
-	# sys / tui
-	bandwhich
-	bottom
-	htop
-	iotop
-	lnav
-	mc
-	micro
-	ncdu
-	newsboat
-	powertop
-	w3m
-	weechat
+	# sys / network
+	curl
+	rclone
+	rsync
+	sshfs
 	# sys / utils
 	bat
-	curl
 	fd
 	fish
 	fzf
 	glow
 	jq
-	lsof
-	iptables-nft
 	man-db
 	man-pages
 	pacman-contrib
 	pkgfile
 	reflector
 	ripgrep
-	rsync
 	tealdeer
 	unzip
-	usbutils
 	zstd
+	# sys / tui
+	bandwhich
+	bottom
+	htop
+	iotop
+	lnav
+	micro
+	ncdu
+	nnn
+	powertop
 )
 
 de_packages=(
@@ -109,8 +107,6 @@ dev_packages=(
 	# dev / base
 	base-devel 
 	git 
-	linux-headers 
-	linux-lts-headers
 	# dev / langs
 	clang
 	jdk11-openjdk
@@ -148,6 +144,7 @@ dev_packages=(
 aur_packages=(
 	# system
 	dracut-hook-uefi
+	lf
 	# desktop
 	corrupter-bin
 	greetd

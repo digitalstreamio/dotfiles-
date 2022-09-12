@@ -1,0 +1,13 @@
+map <enter> open
+map c copy
+map x cut
+map v paste
+map A invert
+map C clear
+map R reload
+map . set hidden!
+map d set info size:time
+map D set info
+
+map gc cd ~/.config
+map gd cd ~/Downloads

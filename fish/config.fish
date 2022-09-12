@@ -1,6 +1,3 @@
-set -gx FZF_DEFAULT_OPTS "--bind='ctrl-o:execute(code {})+abort'"
-
-# aliases
 alias cat='bat'
 alias cr='org.chromium.Chromium -enable-features=UseOzonePlatform -ozone-platform=wayland'
 alias code='com.visualstudio.code'
