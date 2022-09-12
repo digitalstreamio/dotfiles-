@@ -36,6 +36,7 @@ sys_packages=(
 	rclone
 	rsync
 	sshfs
+	tcpdump
 	# sys / utils
 	bat
 	fd

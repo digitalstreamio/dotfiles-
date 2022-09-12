@@ -1,13 +1,49 @@
+set previewer ~/.config/lf/pv.sh
+
+# commands
+
+cmd extract ${{
+    set -f
+    case $f in
+        *.tar.*) tar xavf $f;;
+        *.zip) unzip $f;;
+    esac
+}}
+
+cmd mkdir ${{
+  printf "Directory Name: "
+  read ans
+  mkdir $ans
+}}
+
+cmd mkfile ${{
+  printf "File Name: "
+  read ans
+  $EDITOR $ans
+}}
+
+# bindings
+
+## basic 
 map <enter> open
 map c copy
 map x cut
 map v paste
+map i $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R $f
 map A invert
 map C clear
 map R reload
+
+## commands
+map ae extract
+map mf mkfile
+map md mkdir
+
+## settings
 map . set hidden!
 map d set info size:time
 map D set info
 
-map gc cd ~/.config
+## shortcuts
+map gc cd ~/cloud
 map gd cd ~/Downloads
