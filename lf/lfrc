@@ -1,4 +1,90 @@
+set incsearch true
+set infotimefmtnew "2006-01-02 15:04"
+set infotimefmtold "2006-01-02 15:04"
+set timefmt "2006-01-02 15:04"
 set previewer ~/.config/lf/pv.sh
+
+# bindings
+
+## basics
+map <enter> open
+map e $$EDITOR "$f"
+map i $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R $f
+map w $$SHELL
+map q quit
+map <c-r> reload
+
+#map $ shell
+#map % shell-pipe
+#map ! shell-wait
+#map & shell-async
+
+## file ops
+map c copy
+map x cut
+map v paste
+map C clear
+map d delete
+#map D trash
+map r rename
+
+## selection
+map <space> :toggle; down
+map a glob-select * 
+map A unselect
+map V invert
+
+# search
+map f find
+map F find-back 
+map <f-3> find-next
+map <F-3> find-prev
+
+map / search
+map ? search-back
+map n search-next
+map N search-prev
+
+map b mark-save
+map B mark-remove
+map "'" mark-load 
+
+## navigation
+map <up> up    
+map <pgup> page-up
+map <c-u> half-up
+map <c-y> scroll-up
+map <down> down
+map <pgdn> page-down
+map <c-d> half-down                
+map <c-e> scroll-down         
+map <home> top
+map <end> bottom
+map <left> updir
+
+map gh cd ~
+map gc cd ~/cloud
+map gd cd ~/dev
+map gD cd ~/Downloads
+map gm cd ~/media
+
+## settings
+map zh set hidden!
+map zr set reverse!
+map zn set info
+map zs set info size
+map zt set info time
+map za set info size:time
+map sn :set sortby natural; set info
+map ss :set sortby size; set info size
+map st :set sortby time; set info time
+map sa :set sortby atime; set info atime
+map sc :set sortby ctime; set info ctime
+map se :set sortby ext; set info
+
+map . set hidden!
+map zd set info size:time
+map zD set info
 
 # commands
 
@@ -21,29 +107,3 @@ cmd mkfile ${{
   read ans
   $EDITOR $ans
 }}
-
-# bindings
-
-## basic 
-map <enter> open
-map c copy
-map x cut
-map v paste
-map i $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R $f
-map A invert
-map C clear
-map R reload
-
-## commands
-map ae extract
-map mf mkfile
-map md mkdir
-
-## settings
-map . set hidden!
-map d set info size:time
-map D set info
-
-## shortcuts
-map gc cd ~/cloud
-map gd cd ~/Downloads
