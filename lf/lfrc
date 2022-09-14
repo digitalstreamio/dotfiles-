@@ -9,7 +9,7 @@ set previewer ~/.config/lf/pv.sh
 ## basics
 map <enter> open
 map e $$EDITOR "$f"
-map i $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R $f
+map i $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R "$f"
 map w $$SHELL
 map q quit
 map <c-r> reload
@@ -24,8 +24,7 @@ map c copy
 map x cut
 map v paste
 map C clear
-map d delete
-#map D trash
+map D delete
 map r rename
 
 ## selection

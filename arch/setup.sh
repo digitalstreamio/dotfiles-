@@ -31,7 +31,20 @@ sys_packages=(
 	openssh
 	udisks2
 	zram-generator
-	# sys / network
+	# sys / arch
+	man-db
+	man-pages
+	pacman-contrib
+	pkgfile
+	reflector
+	# sys / monitoring
+	bandwhich
+	bottom
+	htop
+	iotop
+	ncdu
+	powertop
+	# sys / networking
 	curl
 	rclone
 	rsync
@@ -43,30 +56,18 @@ sys_packages=(
 	fish
 	fzf
 	glow
-	jq
-	man-db
-	man-pages
-	pacman-contrib
-	pkgfile
-	reflector
 	ripgrep
 	tealdeer
 	unzip
 	zstd
 	# sys / tui
-	bandwhich
-	bottom
-	htop
-	iotop
-	lnav
 	micro
-	ncdu
+	lnav
 	nnn
-	powertop
 )
 
 de_packages=(
-	# desktop / shell
+	# desktop / base
 	sway
 	swayidle
 	swaylock
@@ -88,6 +89,7 @@ de_packages=(
 	ghostscript
 	gnome-keyring
 	grim
+	jq
 	light
 	wl-clipboard
 	xdg-desktop-portal-gtk
@@ -143,8 +145,9 @@ dev_packages=(
 )
 
 aur_packages=(
-	# system
+	# system / base
 	dracut-hook-uefi
+	# system / tui
 	lf
 	# desktop
 	corrupter-bin
@@ -157,10 +160,11 @@ apps=(
 	org.mozilla.firefox
 	org.chromium.Chromium
 	# multimedia
+	io.mpv.Mpv
 	org.blender.Blender
 	org.gimp.GIMP
 	org.inkscape.Inkscape
-	fr.handbrake.ghb
+	#fr.handbrake.ghb
 	# office
 	org.libreoffice.LibreOffice
 	# utils
