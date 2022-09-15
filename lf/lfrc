@@ -6,6 +6,19 @@ set previewer ~/.config/lf/pv.sh
 
 # bindings
 
+## navigation
+map <up> up    
+map <pgup> page-up
+map <c-u> half-up
+map <c-y> scroll-up
+map <down> down
+map <pgdn> page-down
+map <c-d> half-down                
+map <c-e> scroll-down         
+map <home> top
+map <end> bottom
+map <left> updir
+
 ## basics
 map <enter> open
 map e $$EDITOR "$f"
@@ -44,27 +57,15 @@ map ? search-back
 map n search-next
 map N search-prev
 
+# shortcuts
 map b mark-save
 map B mark-remove
 map "'" mark-load 
 
-## navigation
-map <up> up    
-map <pgup> page-up
-map <c-u> half-up
-map <c-y> scroll-up
-map <down> down
-map <pgdn> page-down
-map <c-d> half-down                
-map <c-e> scroll-down         
-map <home> top
-map <end> bottom
-map <left> updir
-
 map gh cd ~
 map gc cd ~/cloud
 map gd cd ~/dev
-map gD cd ~/Downloads
+map gD cd ~/downloads
 map gm cd ~/media
 
 ## settings
@@ -82,7 +83,7 @@ map sc :set sortby ctime; set info ctime
 map se :set sortby ext; set info
 
 map . set hidden!
-map zd set info size:time
+map d set info size:time
 map zD set info
 
 # commands

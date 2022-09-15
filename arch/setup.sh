@@ -25,12 +25,6 @@ sys_packages=(
 	efibootmgr 
 	iptables-nft
 	sudo
-	# sys / services
-	firewalld
-	fwupd
-	openssh
-	udisks2
-	zram-generator
 	# sys / arch
 	man-db
 	man-pages
@@ -50,6 +44,12 @@ sys_packages=(
 	rsync
 	sshfs
 	tcpdump
+	# sys / services
+	firewalld
+	fwupd
+	openssh
+	udisks2
+	zram-generator
 	# sys / utils
 	bat
 	fd
@@ -73,14 +73,14 @@ de_packages=(
 	swaylock
 	waybar
 	wofi
+	# desktop / apps
+	alacritty
+	pcmanfm-gtk3
 	# desktop / services
 	mako
 	pipewire-pulse
 	wireplumber
 	xorg-xwayland
-	# desktop / apps
-	alacritty
-	pcmanfm-gtk3
 	# desktop / utils
 	colord
 	cups
@@ -247,7 +247,7 @@ vscode_extensions=(
 	ms-python.black-formatter
 )
 
-install_packages() {
+install_system() {
 	pacman -Syu --needed "${sys_packages[@]}" "${de_packages[@]}" "${dev_packages[@]}"
 }
 
@@ -300,6 +300,11 @@ config_system() {
 	timedatectl set-ntp true
 
 	ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+	if [[ ! -d /data ]]; then
+		mkdir -p /data
+		chattr +C /data
+	fi
 }
 
 config_apps() {
@@ -320,13 +325,21 @@ config_user() {
 		fi
 
 		usermod -s /usr/bin/fish $SUDO_USER
+		usermod -aG libvirt $SUDO_USER
+		
+		sudo -u "$SUDO_USER" bash <<-'EOF'
+		if [[ ! -d ~/.minikube ]]; then
+			mkdir ~/.minikube
+			chattr +C ~/.minikube
+		fi
+		EOF
 	fi
 }
 
 main() {
 	case "$1" in
 		all)
-			install_packages
+			install_system
 			install_apps
 			install_user
 			install_aur
@@ -334,28 +347,17 @@ main() {
 			config_apps
 			config_user
 			;;
-		install-packages)
-			install_packages ;;
-		install-apps) 
-			install_apps ;;
-		install-aur) 
-			install_aur ;;
-		install-user) 
-			install_user ;;
-		config-system) 
-			config_system ;;
-		config-apps)
-			config_apps ;;
-		config-user) 
-			config_user ;;
-		pkg-sys) 
-			pacman -Syu --needed "${sys_packages[@]}" ;;
-		pkg-de)
-			pacman -Syu --needed "${de_packages[@]}" ;;
-		pkg-dev)
-			pacman -Syu --needed "${dev_packages[@]}" ;;
-		*) 
-			echo "Invalid action ${1}!"; exit 1 ;;
+		install-system) install_system ;;
+		install-apps) install_apps ;;
+		install-aur) install_aur ;;
+		install-user) install_user ;;
+		config-system) config_system ;;
+		config-apps) config_apps ;;
+		config-user) config_user ;;
+		install-core) pacman -Syu --needed "${sys_packages[@]}" ;;
+		install-desktop) pacman -Syu --needed "${de_packages[@]}" ;;
+		install-dev) pacman -Syu --needed "${dev_packages[@]}" ;;
+		*) echo "Invalid action ${1}!"; exit 1 ;;
 	esac
 }
 
