@@ -83,7 +83,7 @@ map se :set sortby ext; set info
 
 map . set hidden!
 map d set info size:time
-map zD set info
+map D set info
 
 # commands
 
