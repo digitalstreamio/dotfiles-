@@ -37,8 +37,8 @@ map c copy
 map x cut
 map v paste
 map C clear
-map D delete
 map r rename
+map <delete> delete
 
 ## selection
 map <space> :toggle; down
@@ -63,8 +63,7 @@ map B mark-remove
 map "'" mark-load 
 
 map gh cd ~
-map gc cd ~/cloud
-map gd cd ~/dev
+map gd cd ~/docs
 map gD cd ~/downloads
 map gm cd ~/media
 
