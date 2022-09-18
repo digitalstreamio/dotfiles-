@@ -43,8 +43,8 @@ map <delete> delete
 ## selection
 map <space> :toggle; down
 map a glob-select * 
-map A unselect
-map V invert
+map A invert
+map u unselect
 
 # search
 map f find
@@ -58,9 +58,9 @@ map n search-next
 map N search-prev
 
 # shortcuts
-map b mark-save
-map B mark-remove
-map "'" mark-load 
+map b mark-load 
+map B mark-save
+map <c-b> mark-remove
 
 map gh cd ~
 map gd cd ~/docs
