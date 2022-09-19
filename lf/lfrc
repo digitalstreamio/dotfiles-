@@ -19,12 +19,18 @@ map <home> top
 map <end> bottom
 map <left> updir
 
+## selection
+map <space> :toggle; down
+map a glob-select * 
+map A invert
+map u unselect
+
 ## basics
-map <enter> open
+map q quit
+map w $$SHELL
 map e $$EDITOR "$f"
 map i $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R "$f"
-map w $$SHELL
-map q quit
+map <enter> open
 map <c-r> reload
 
 #map $ shell
@@ -39,12 +45,6 @@ map v paste
 map C clear
 map r rename
 map <delete> delete
-
-## selection
-map <space> :toggle; down
-map a glob-select * 
-map A invert
-map u unselect
 
 # search
 map f find
