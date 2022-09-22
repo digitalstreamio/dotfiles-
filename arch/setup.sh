@@ -14,7 +14,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # desktop:	620MB/206
 # dev:		1670MB/93
 
-sys_packages=(
+core_packages=(
 	# sys / base
 	base 
 	linux 
@@ -66,7 +66,7 @@ sys_packages=(
 	nnn
 )
 
-de_packages=(
+desktop_packages=(
 	# desktop / base
 	sway
 	swayidle
@@ -248,7 +248,7 @@ vscode_extensions=(
 )
 
 install_system() {
-	pacman -Syu --needed "${sys_packages[@]}" "${de_packages[@]}" "${dev_packages[@]}"
+	pacman -Syu --needed "${core_packages[@]}" "${desktop_packages[@]}" "${dev_packages[@]}"
 }
 
 install_apps() {
@@ -354,8 +354,8 @@ main() {
 		config-system) config_system ;;
 		config-apps) config_apps ;;
 		config-user) config_user ;;
-		install-core) pacman -Syu --needed "${sys_packages[@]}" ;;
-		install-desktop) pacman -Syu --needed "${de_packages[@]}" ;;
+		install-core) pacman -Syu --needed "${core_packages[@]}" ;;
+		install-desktop) pacman -Syu --needed "${desktop_packages[@]}" ;;
 		install-dev) pacman -Syu --needed "${dev_packages[@]}" ;;
 		*) echo "Invalid action ${1}!"; exit 1 ;;
 	esac
