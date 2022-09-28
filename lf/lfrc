@@ -6,7 +6,7 @@ set previewer ~/.config/lf/pv.sh
 
 # bindings
 
-## navigation
+## 1/navigation
 map <up> up    
 map <pgup> page-up
 map <c-u> half-up
@@ -19,13 +19,13 @@ map <home> top
 map <end> bottom
 map <left> updir
 
-## selection
+## 1/selection
 map <space> :toggle; down
 map a glob-select * 
 map A invert
 map u unselect
 
-## basics
+## 2/basics
 map q quit
 map w $$SHELL
 map e $$EDITOR "$f"
@@ -38,7 +38,7 @@ map <c-r> reload
 #map ! shell-wait
 #map & shell-async
 
-## file ops
+## 2/file ops
 map c copy
 map x cut
 map v paste
@@ -46,7 +46,7 @@ map C clear
 map r rename
 map <delete> delete
 
-# search
+# 2/search
 map f find
 map F find-back 
 map <f-3> find-next
@@ -57,7 +57,7 @@ map ? search-back
 map n search-next
 map N search-prev
 
-# shortcuts
+# 2/shortcuts
 map b mark-load 
 map B mark-save
 map <c-b> mark-remove
@@ -67,7 +67,7 @@ map gd cd ~/docs
 map gD cd ~/downloads
 map gm cd ~/media
 
-## settings
+## 3/settings
 map zh set hidden!
 map zr set reverse!
 map zn set info

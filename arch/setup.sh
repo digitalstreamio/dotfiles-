@@ -25,25 +25,17 @@ core_packages=(
 	efibootmgr 
 	iptables-nft
 	sudo
-	# sys / arch
-	man-db
-	man-pages
-	pacman-contrib
-	pkgfile
-	reflector
-	# sys / monitoring
+	unzip
+	zstd
+	# sys / apps
 	bandwhich
 	bottom
 	htop
-	iotop
+	micro
+	lnav
 	ncdu
+	nnn
 	powertop
-	# sys / networking
-	curl
-	rclone
-	rsync
-	sshfs
-	tcpdump
 	# sys / services
 	firewalld
 	fwupd
@@ -58,12 +50,18 @@ core_packages=(
 	glow
 	ripgrep
 	tealdeer
-	unzip
-	zstd
-	# sys / tui
-	micro
-	lnav
-	nnn
+	# sys / utils / networking
+	curl
+	rclone
+	rsync
+	sshfs
+	tcpdump
+	# sys / extras
+	man-db
+	man-pages
+	pacman-contrib
+	pkgfile
+	reflector
 )
 
 desktop_packages=(
@@ -96,7 +94,7 @@ desktop_packages=(
 	xdg-desktop-portal-wlr
 	xdg-user-dirs
 	xdg-utils
-	# desktop / assets
+	# desktop / extras
 	gnome-themes-extra
 	ttf-caladea
 	ttf-carlito
