@@ -28,8 +28,6 @@ core_packages=(
 	unzip
 	zstd
 	# sys / apps
-	bandwhich
-	bottom
 	htop
 	micro
 	lnav
@@ -81,10 +79,8 @@ desktop_packages=(
 	xorg-xwayland
 	# desktop / utils
 	colord
-	cups
 	dconf-editor
 	flatpak
-	ghostscript
 	gnome-keyring
 	grim
 	jq

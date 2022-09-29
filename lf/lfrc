@@ -26,11 +26,11 @@ map A invert
 map u unselect
 
 ## 2/basics
+map <enter> open
 map q quit
 map w $$SHELL
 map e $$EDITOR "$f"
-map i $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R "$f"
-map <enter> open
+map r $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R "$f"
 map <c-r> reload
 
 #map $ shell
@@ -39,11 +39,12 @@ map <c-r> reload
 #map & shell-async
 
 ## 2/file ops
-map c copy
 map x cut
+map c copy
 map v paste
 map C clear
-map r rename
+
+map <f-2> rename
 map <delete> delete
 
 # 2/search
@@ -63,6 +64,7 @@ map B mark-save
 map <c-b> mark-remove
 
 map gh cd ~
+map gv cd ~/dev
 map gd cd ~/docs
 map gD cd ~/downloads
 map gm cd ~/media
