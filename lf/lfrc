@@ -26,12 +26,12 @@ map A invert
 map u unselect
 
 ## 2/basics
-map <enter> open
 map q quit
 map w $$SHELL
 map e $$EDITOR "$f"
 map r $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R "$f"
-map <c-r> reload
+map <enter> open
+map <f-5> reload
 
 #map $ shell
 #map % shell-pipe
@@ -43,9 +43,8 @@ map x cut
 map c copy
 map v paste
 map C clear
-
-map <f-2> rename
 map <delete> delete
+map <f-2> rename
 
 # 2/search
 map f find
