@@ -33,7 +33,6 @@ core_packages=(
 	lnav
 	ncdu
 	nnn
-	powertop
 	# sys / services
 	firewalld
 	fwupd
@@ -65,6 +64,7 @@ core_packages=(
 desktop_packages=(
 	# desktop / base
 	sway
+	swaybg
 	swayidle
 	swaylock
 	waybar
@@ -190,12 +190,10 @@ sys_configs=(
 	etc/systemd/network/br0.netdev
 	etc/systemd/network/br0.network
 	etc/systemd/network/wired.network
-	etc/systemd/system/powertop.service
 	etc/systemd/zram-generator.conf
 	# desktop
 	etc/greetd/config.toml
 	usr/lib/systemd/user/ssh-agent.service
-	usr/lib/systemd/user/swayidle.service
 	usr/lib/systemd/user/waybar.service
 )
 
@@ -206,7 +204,6 @@ sys_scripts=(
 sys_services=(
 	# system
 	firewalld.service
-	powertop.service
 	sshd.service
 	systemd-networkd.service
 	systemd-resolved.service
@@ -223,7 +220,6 @@ sys_services=(
 
 user_services=(
 	ssh-agent.service
-	swayidle.service
 	waybar.service
 )
 
@@ -290,7 +286,6 @@ config_system() {
 	done
 	
 	systemctl start /dev/zram0
-	systemctl set-default graphical.target
 	timedatectl set-ntp true
 
 	ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
@@ -330,6 +325,16 @@ config_user() {
 	fi
 }
 
+config_desktop() {
+	if [[ -n "$SUDO_USER" ]]; then
+		sudo -u "$SUDO_USER" bash <<-'EOF'
+		gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
+		gsettings set org.gnome.desktop.interface font-antialiasing rgba
+		gsettings set org.gnome.desktop.interface font-hinting slight
+		EOF
+	fi
+}
+
 main() {
 	case "$1" in
 		all)
@@ -347,6 +352,7 @@ main() {
 		install-user) install_user ;;
 		config-system) config_system ;;
 		config-apps) config_apps ;;
+		config-desktop) config_desktop ;;
 		config-user) config_user ;;
 		install-core) pacman -Syu --needed "${core_packages[@]}" ;;
 		install-desktop) pacman -Syu --needed "${desktop_packages[@]}" ;;

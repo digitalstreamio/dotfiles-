@@ -7,8 +7,6 @@ cp .profile ~/.profile
 # fisher install jethrokuan/fzf
 # fisher install edc/bass
 # lpadmin -p Canon-G6000 -E -v ipps://192.168.4.50 -m everywhere
-# gsettings set org.gnome.desktop.interface font-antialiasing rgba
-# gsettings set org.gnome.desktop.interface font-hinting slight
 # flatpak override com.visualstudio.code --user \
 #    --env=ANDROID_SDK_ROOT=$HOME/sdk/android \
 #    --env=JAVA_HOME=/usr/lib/sdk/openjdk11 \
