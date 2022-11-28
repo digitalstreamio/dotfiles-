@@ -9,10 +9,10 @@ fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# base:		1530MB/125
-# sys:		350MB/73
-# desktop:	620MB/206
-# dev:		1670MB/93
+# base:		950MB/140
+# core:		430MB/95
+# desktop:	540MB/189
+# dev:		2138MB/208
 
 core_packages=(
 	# sys / base
@@ -24,7 +24,6 @@ core_packages=(
 	dracut 
 	efibootmgr 
 	intel-ucode
-	iptables-nft
 	sudo
 	# sys / apps
 	fish
@@ -53,6 +52,8 @@ core_packages=(
 	# sys / utils / networking
 	curl
 	gnu-netcat
+	inetutils
+	iptables-nft
 	rclone
 	rsync
 	sshfs
@@ -133,6 +134,7 @@ dev_packages=(
 	kompose
 	kubectl
 	# dev / utils
+	android-udev
 	cmake
 	dnsmasq
 	edk2-ovmf
