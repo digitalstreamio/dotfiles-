@@ -23,42 +23,51 @@ core_packages=(
 	btrfs-progs 
 	dracut 
 	efibootmgr 
+	intel-ucode
 	iptables-nft
 	sudo
-	unzip
-	zstd
 	# sys / apps
+	fish
+	atop
 	htop
 	micro
 	lnav
 	ncdu
 	nnn
 	# sys / services
+	bolt
 	firewalld
 	fwupd
+	iwd
 	openssh
 	udisks2
 	zram-generator
 	# sys / utils
 	bat
+	exa
 	fd
-	fish
 	fzf
 	glow
 	ripgrep
 	tealdeer
 	# sys / utils / networking
 	curl
+	gnu-netcat
 	rclone
 	rsync
 	sshfs
 	tcpdump
 	# sys / extras
+	lostfiles
 	man-db
 	man-pages
 	pacman-contrib
+	pacutils
 	pkgfile
 	reflector
+	unzip
+	zstd
+	usbutils
 )
 
 desktop_packages=(
@@ -124,6 +133,7 @@ dev_packages=(
 	kompose
 	kubectl
 	# dev / utils
+	cmake
 	dnsmasq
 	edk2-ovmf
 	edk2-shell
@@ -136,6 +146,7 @@ dev_packages=(
 	python-poetry
 	tig
 	tokei
+	wrk
 )
 
 aur_packages=(
