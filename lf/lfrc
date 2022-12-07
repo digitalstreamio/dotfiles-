@@ -22,8 +22,8 @@ map <left> updir
 ## 1/selection
 map <space> :toggle; down
 map a glob-select * 
-map A invert
-map u unselect
+map A unselect
+map I invert
 
 ## 2/basics
 map q quit

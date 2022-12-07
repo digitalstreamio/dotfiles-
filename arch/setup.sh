@@ -39,6 +39,7 @@ core_packages=(
 	fwupd
 	iwd
 	openssh
+	power-profiles-daemon
 	udisks2
 	zram-generator
 	# sys / utils
@@ -81,7 +82,6 @@ desktop_packages=(
 	wofi
 	# desktop / apps
 	alacritty
-	pcmanfm-gtk3
 	# desktop / services
 	mako
 	pipewire-pulse
@@ -280,6 +280,12 @@ install_user() {
 		curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
 		curl https://sh.rustup.rs -sSf | sh
 		EOF
+
+		if command -v com.visualstudio.code &> /dev/null; then
+			for ext in "${vscode_extensions[@]}"; do
+				sudo -u "$SUDO_USER" --preserve-env=DBUS_SESSION_BUS_ADDRESS com.visualstudio.code --install-extension $ext
+			done
+		fi
 	fi
 }
 
@@ -319,12 +325,6 @@ config_user() {
 		for service in "${user_services[@]}"; do
 			sudo -u "$SUDO_USER" --preserve-env=DBUS_SESSION_BUS_ADDRESS systemctl --user enable $service
 		done
-
-		if command -v com.visualstudio.code &> /dev/null; then
-			for ext in "${vscode_extensions[@]}"; do
-				sudo -u "$SUDO_USER" --preserve-env=DBUS_SESSION_BUS_ADDRESS com.visualstudio.code --install-extension $ext
-			done
-		fi
 
 		usermod -s /usr/bin/fish $SUDO_USER
 		usermod -aG libvirt $SUDO_USER
