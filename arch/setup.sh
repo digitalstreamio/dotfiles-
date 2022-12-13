@@ -24,25 +24,16 @@ core_packages=(
 	dracut 
 	efibootmgr 
 	intel-ucode
+	openssh
 	sudo
-	# sys / apps
-	fish
-	atop
-	htop
-	micro
-	lnav
-	ncdu
-	nnn
 	# sys / services
 	bolt
 	firewalld
 	fwupd
 	iwd
-	openssh
 	power-profiles-daemon
-	udisks2
-	zram-generator
 	# sys / utils
+	fish
 	bat
 	exa
 	fd
@@ -50,6 +41,13 @@ core_packages=(
 	glow
 	ripgrep
 	tealdeer
+	# sys / utils / tui
+	atop
+	htop
+	micro
+	lnav
+	ncdu
+	nnn
 	# sys / utils / networking
 	curl
 	gnu-netcat
@@ -59,17 +57,18 @@ core_packages=(
 	rsync
 	sshfs
 	tcpdump
-	# sys / extras
+	# sys / utils/ misc
 	lostfiles
+	unzip
+	usbutils
+	zram-generator
+	# sys / extras
 	man-db
 	man-pages
 	pacman-contrib
 	pacutils
 	pkgfile
 	reflector
-	unzip
-	zstd
-	usbutils
 )
 
 desktop_packages=(
@@ -80,15 +79,15 @@ desktop_packages=(
 	swaylock
 	waybar
 	wofi
-	# desktop / apps
-	alacritty
-	# desktop / services
 	mako
 	pipewire-pulse
 	wireplumber
+	xdg-desktop-portal-gtk
+	xdg-desktop-portal-wlr
 	xorg-xwayland
+	# desktop / apps
+	alacritty
 	# desktop / utils
-	colord
 	dconf-editor
 	flatpak
 	gnome-keyring
@@ -96,8 +95,6 @@ desktop_packages=(
 	jq
 	light
 	wl-clipboard
-	xdg-desktop-portal-gtk
-	xdg-desktop-portal-wlr
 	xdg-user-dirs
 	xdg-utils
 	# desktop / extras
@@ -134,7 +131,6 @@ dev_packages=(
 	kompose
 	kubectl
 	# dev / utils
-	android-udev
 	cmake
 	dnsmasq
 	edk2-ovmf
@@ -148,7 +144,6 @@ dev_packages=(
 	python-poetry
 	tig
 	tokei
-	wrk
 )
 
 aur_packages=(

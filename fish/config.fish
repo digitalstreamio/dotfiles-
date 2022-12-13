@@ -1,3 +1,4 @@
+#starship init fish | source
 alias cat='bat'
 alias cr='org.chromium.Chromium -enable-features=UseOzonePlatform -ozone-platform=wayland'
 alias code='com.visualstudio.code'
