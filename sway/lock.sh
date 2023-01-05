@@ -13,5 +13,5 @@ done
 
 # printf '%s\n' "${images[@]}" | xargs -P 0 -I{} convert -blur 0x8 {} {}
 
-swaylock ${swaylock_args[@]} -s center
+swaylock ${swaylock_args[@]} -f -s center
 rm ${images[@]}

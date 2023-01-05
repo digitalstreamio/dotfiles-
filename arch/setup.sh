@@ -39,6 +39,7 @@ core_packages=(
 	fd
 	fzf
 	glow
+	jq
 	ripgrep
 	tealdeer
 	# sys / utils / tui
@@ -88,12 +89,11 @@ desktop_packages=(
 	# desktop / apps
 	alacritty
 	# desktop / utils
+	brightnessctl
 	dconf-editor
 	flatpak
 	gnome-keyring
 	grim
-	jq
-	light
 	wl-clipboard
 	xdg-user-dirs
 	xdg-utils
@@ -165,7 +165,6 @@ apps=(
 	io.mpv.Mpv
 	org.blender.Blender
 	org.gimp.GIMP
-	org.inkscape.Inkscape
 	#fr.handbrake.ghb
 	# office
 	org.libreoffice.LibreOffice
@@ -182,10 +181,11 @@ apps=(
 	# emulators
 	net.fsuae.FS-UAE
 	net.sf.VICE
+	com.tic80.TIC_80
 	# ext / sys
 	org.gtk.Gtk3theme.Adwaita-dark
 	# ext / dev
-	org.freedesktop.Sdk.Extension.openjdk11//21.08
+	org.freedesktop.Sdk.Extension.openjdk11//22.08
 )
 
 sys_configs=(
