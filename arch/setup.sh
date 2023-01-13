@@ -14,8 +14,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # desktop:	540MB/189
 # dev:		2138MB/208
 
-core_packages=(
-	# sys / base
+core_amd64_packages=(
 	base 
 	linux 
 	linux-firmware 
@@ -23,16 +22,40 @@ core_packages=(
 	btrfs-progs 
 	dracut 
 	efibootmgr 
-	intel-ucode
-	openssh
-	sudo
-	# sys / services
-	bolt
-	firewalld
-	fwupd
 	iwd
+	openssh
+)
+
+core_arm64_packages=(
+	archlinuxarm-keyring
+	asahi-fwextract
+	asahi-meta
+	asahi-scripts
+	asahilinux-keyring
+	base
+	dhcpcd
+	grub
+	iwd
+	linux-asahi 6.1rc6.asahi4-1
+	m1n1
+	nano
+	net-tools
+	netctl
+	openssh
+	uboot-asahi
+	vi
+	which	
+)
+
+base_packages=(
+	# sys / services
+	firewalld
+	iwd
+	openssh
 	power-profiles-daemon
-	# sys / utils
+	#bolt
+	#fwupd
+	# sys / utils / base
 	fish
 	bat
 	exa
@@ -42,6 +65,7 @@ core_packages=(
 	jq
 	ripgrep
 	tealdeer
+	sudo
 	# sys / utils / tui
 	atop
 	htop
@@ -60,16 +84,14 @@ core_packages=(
 	tcpdump
 	# sys / utils/ misc
 	lostfiles
-	unzip
-	usbutils
-	zram-generator
-	# sys / extras
 	man-db
 	man-pages
 	pacman-contrib
 	pacutils
 	pkgfile
-	reflector
+	unzip
+	usbutils
+	zram-generator
 )
 
 desktop_packages=(
@@ -97,7 +119,7 @@ desktop_packages=(
 	wl-clipboard
 	xdg-user-dirs
 	xdg-utils
-	# desktop / extras
+	# desktop / assets
 	gnome-themes-extra
 	ttf-caladea
 	ttf-carlito
@@ -113,6 +135,7 @@ dev_packages=(
 	git 
 	# dev / langs
 	clang
+	go
 	jdk11-openjdk
 	jdk17-openjdk
 	nodejs-lts-fermium
@@ -122,19 +145,19 @@ dev_packages=(
 	ansible
 	fabric
 	monit
-	libvirt
 	podman
-	qemu-desktop
 	terraform
-	helm
-	minikube
-	kompose
-	kubectl
+	#libvirt
+	#qemu-desktop
+	#helm
+	#minikube
+	#kompose
+	#kubectl
 	# dev / utils
 	cmake
 	dnsmasq
-	edk2-ovmf
-	edk2-shell
+	#edk2-ovmf
+	#edk2-shell
 	git-delta
 	github-cli
 	meson
@@ -147,25 +170,26 @@ dev_packages=(
 )
 
 aur_packages=(
-	# system / base
-	dracut-hook-uefi
-	# system / tui
+	# system
 	lf
 	# desktop
-	corrupter-bin
+	corrupter-git
 	greetd
 	sway-systemd
 )
 
+aur_amd64_packages=(
+	# system
+	dracut-hook-uefi
+)
+
 apps=(
 	# internet
-	org.mozilla.firefox
+	#org.mozilla.firefox
 	org.chromium.Chromium
 	# multimedia
 	io.mpv.Mpv
-	org.blender.Blender
 	org.gimp.GIMP
-	#fr.handbrake.ghb
 	# office
 	org.libreoffice.LibreOffice
 	# utils
@@ -175,8 +199,8 @@ apps=(
 	org.gnome.meld
 	org.keepassxc.KeePassXC
 	# dev
-	com.google.AndroidStudio
-	com.jetbrains.IntelliJ-IDEA-Community
+	#com.google.AndroidStudio
+	#com.jetbrains.IntelliJ-IDEA-Community
 	com.visualstudio.code
 	# emulators
 	net.fsuae.FS-UAE
@@ -191,6 +215,7 @@ apps=(
 sys_configs=(
 	# system
 	etc/ssh/sshd_config
+	etc/modprobe.d/hid_apple.conf
 	etc/modules-load.d/zram.conf
 	etc/sysctl.d/00-ansible.conf
 	etc/systemd/journald.conf.d/00-ansible.conf
@@ -246,27 +271,24 @@ vscode_extensions=(
 )
 
 install_system() {
-	pacman -Syu --needed "${core_packages[@]}" "${desktop_packages[@]}" "${dev_packages[@]}"
-}
-
-install_apps() {
-	flatpak install --or-update --noninteractive "${apps[@]}"
-}
-
-install_aur() {
-	if [[ -n "$SUDO_USER" ]] && ! command -v paru &> /dev/null; then
+	pacman -Syu --needed "${base_packages[@]}" "${desktop_packages[@]}" "${dev_packages[@]}"
+	if [[ -n "$SUDO_USER" ]] && ! command -v yay &> /dev/null; then
 		sudo -u "$SUDO_USER" bash <<-'EOF'
 		set -euxo pipefail
 		BUILDDIR=$(mktemp -d --tmpdir aur.XXXXXXXX)
 		cd "$BUILDDIR"
-		git clone --depth=1 "https://aur.archlinux.org/paru-bin"
-		cd paru-bin
+		git clone --depth=1 "https://aur.archlinux.org/yay"
+		cd yay
 		makepkg --noconfirm --nocheck -csi
 		EOF
 	fi
 	if [[ -n "$SUDO_USER" ]]; then
-		sudo -u "$SUDO_USER" --preserve-env=AUR_PAGER,PACKAGER paru -S "${aur_packages[@]}"
+		sudo -u "$SUDO_USER" --preserve-env=AUR_PAGER,PACKAGER yay -S "${aur_packages[@]}"
 	fi
+}
+
+install_apps() {
+	flatpak install --or-update --noninteractive "${apps[@]}"
 }
 
 install_user() {
@@ -306,7 +328,7 @@ config_system() {
 
 	if [[ ! -d /data ]]; then
 		mkdir -p /data
-		chattr +C /data
+		chattr +C /data || true
 	fi
 }
 
@@ -322,23 +344,13 @@ config_user() {
 		done
 
 		usermod -s /usr/bin/fish $SUDO_USER
-		usermod -aG libvirt $SUDO_USER
+		#usermod -aG libvirt $SUDO_USER
 		
 		sudo -u "$SUDO_USER" bash <<-'EOF'
 		if [[ ! -d ~/.minikube ]]; then
 			mkdir ~/.minikube
-			chattr +C ~/.minikube
+			chattr +C ~/.minikube || true
 		fi
-		EOF
-	fi
-}
-
-config_desktop() {
-	if [[ -n "$SUDO_USER" ]]; then
-		sudo -u "$SUDO_USER" bash <<-'EOF'
-		gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
-		gsettings set org.gnome.desktop.interface font-antialiasing rgba
-		gsettings set org.gnome.desktop.interface font-hinting slight
 		EOF
 	fi
 }
@@ -349,20 +361,17 @@ main() {
 			install_system
 			install_apps
 			install_user
-			install_aur
 			config_system
 			config_apps
 			config_user
 			;;
 		install-system) install_system ;;
 		install-apps) install_apps ;;
-		install-aur) install_aur ;;
 		install-user) install_user ;;
 		config-system) config_system ;;
 		config-apps) config_apps ;;
-		config-desktop) config_desktop ;;
 		config-user) config_user ;;
-		install-core) pacman -Syu --needed "${core_packages[@]}" ;;
+		install-base) pacman -Syu --needed "${base_packages[@]}" ;;
 		install-desktop) pacman -Syu --needed "${desktop_packages[@]}" ;;
 		install-dev) pacman -Syu --needed "${dev_packages[@]}" ;;
 		*) echo "Invalid action ${1}!"; exit 1 ;;

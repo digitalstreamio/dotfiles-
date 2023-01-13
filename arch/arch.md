@@ -60,7 +60,7 @@ mount /dev/disk/by-partlabel/EFI /mnt/boot
 # Installation
 
 reflector --country ${MIRROR_REGION} --protocol https --sort score --latest 10 --save /etc/pacman.d/mirrorlist; \
-pacstrap /mnt base linux linux-lts linux-firmware btrfs-progs dracut efibootmgr openssh sudo; \
+pacstrap /mnt base linux linux-lts linux-firmware btrfs-progs dracut efibootmgr iwd openssh sudo; \
 genfstab -L -p /mnt >> /mnt/etc/fstab
 
 # Configuration
@@ -97,7 +97,6 @@ systemctl enable systemd-networkd; \
 systemctl enable systemd-resolved; \
 systemctl enable sshd
 
-pacman -S iwd; \
 echo > /etc/iwd/main.conf >>EOF
 [General]
 EnableNetworkConfiguration=true
