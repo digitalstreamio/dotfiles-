@@ -1,7 +1,7 @@
 #starship init fish | source
 alias cat='bat'
-alias cr='org.chromium.Chromium -enable-features=UseOzonePlatform -ozone-platform=wayland'
-alias code='com.visualstudio.code'
+alias cr='chromium'
+alias code='com.visualstudio.code --enable-features=UseOzonePlatform --ozone-platform=wayland'
 alias help='tldr'
 alias jd='journalctl'
 alias pv="fzf --preview 'bat --color \"always\" {}'"

@@ -53,11 +53,11 @@ core_packages_arm64=(
 
 base_packages=(
 	# sys / services
+	bolt
 	firewalld
 	iwd
 	openssh
 	power-profiles-daemon
-	#bolt
 	#fwupd
 	# sys / utils / base
 	fish
