@@ -6,10 +6,3 @@ handbrake-cli
 mediainfo
 intel-media-driver
 intel-media-sdk
-
-maven
-qemu-desktop
-qemu-system-aarch64
-virt-install
-fuse-overlayfs
-slirp4netns

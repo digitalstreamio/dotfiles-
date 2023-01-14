@@ -8,13 +8,17 @@ if [[ $EUID != 0 ]]; then
 fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+case "$(uname --machine)" in
+	x86_64) ARCH="amd64";;
+	aarch64) ARCH="arm64";;
+esac
 
 # base:		950MB/140
 # core:		430MB/95
 # desktop:	540MB/189
 # dev:		2138MB/208
 
-core_amd64_packages=(
+core_packages_amd64=(
 	base 
 	linux 
 	linux-firmware 
@@ -26,7 +30,7 @@ core_amd64_packages=(
 	openssh
 )
 
-core_arm64_packages=(
+core_packages_arm64=(
 	archlinuxarm-keyring
 	asahi-fwextract
 	asahi-meta
@@ -36,7 +40,7 @@ core_arm64_packages=(
 	dhcpcd
 	grub
 	iwd
-	linux-asahi 6.1rc6.asahi4-1
+	linux-asahi
 	m1n1
 	nano
 	net-tools
@@ -147,27 +151,45 @@ dev_packages=(
 	monit
 	podman
 	terraform
-	#libvirt
-	#qemu-desktop
 	#helm
 	#minikube
 	#kompose
 	#kubectl
+	# dev / virt
+	#libvirt
+	#qemu-desktop
+	#virt-install
 	# dev / utils
 	cmake
 	dnsmasq
 	#edk2-ovmf
 	#edk2-shell
+	fuse-overlayfs
 	git-delta
 	github-cli
+	maven
 	meson
 	ninja
 	podman-docker
 	python-decorator
 	python-poetry
+	slirp4netns
 	tig
 	tokei
 )
+
+if [ "$ARCH" == "amd64" ]; then
+	dev_packages=(
+		"${dev_packages[@]}"
+		# dev / virt
+		libvirt
+		qemu-desktop
+		virt-install
+		# dev / utils
+		edk2-ovmf
+		edk2-shell
+	)
+fi
 
 aur_packages=(
 	# system
@@ -178,15 +200,18 @@ aur_packages=(
 	sway-systemd
 )
 
-aur_amd64_packages=(
-	# system
-	dracut-hook-uefi
-)
+if [ "$ARCH" == "amd64" ]; then
+	aur_packages=(
+		"${aur_packages[@]}"
+		# system
+		dracut-hook-uefi
+	)
+fi
 
 apps=(
 	# internet
 	#org.mozilla.firefox
-	org.chromium.Chromium
+	#org.chromium.Chromium
 	# multimedia
 	io.mpv.Mpv
 	org.gimp.GIMP
@@ -212,10 +237,32 @@ apps=(
 	org.freedesktop.Sdk.Extension.openjdk11//22.08
 )
 
+if [ "$ARCH" == "amd64" ]; then
+	apps=(
+		"${apps[@]}"
+		# internet
+		org.mozilla.firefox
+		org.chromium.Chromium
+		# dev
+		com.google.AndroidStudio
+		com.jetbrains.IntelliJ-IDEA-Community
+	)
+fi
+
+app_packages=()
+
+if [ "$ARCH" == "arm64" ]; then
+	app_packages=(
+		"${app_packages[@]}"
+		# internet
+		firefox
+		chromium
+	)
+fi
+
 sys_configs=(
 	# system
 	etc/ssh/sshd_config
-	etc/modprobe.d/hid_apple.conf
 	etc/modules-load.d/zram.conf
 	etc/sysctl.d/00-ansible.conf
 	etc/systemd/journald.conf.d/00-ansible.conf
@@ -229,6 +276,14 @@ sys_configs=(
 	usr/lib/systemd/user/ssh-agent.service
 	usr/lib/systemd/user/waybar.service
 )
+
+if [ "$ARCH" == "arm64" ]; then
+	sys_configs=(
+		"${sys_configs[@]}"
+		# system
+		etc/modprobe.d/hid_apple.conf
+	)
+fi
 
 sys_scripts=(
 	bin/sway-run.sh
@@ -289,13 +344,13 @@ install_system() {
 
 install_apps() {
 	flatpak install --or-update --noninteractive "${apps[@]}"
+	pacman -Syu --needed "${app_packages[@]}" 
 }
 
 install_user() {
 	if [[ -n "$SUDO_USER" ]]; then
 		sudo -u "$SUDO_USER" bash <<-'EOF'
 		curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
-		curl https://sh.rustup.rs -sSf | sh
 		EOF
 
 		if command -v com.visualstudio.code &> /dev/null; then
@@ -325,11 +380,6 @@ config_system() {
 	timedatectl set-ntp true
 
 	ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-
-	if [[ ! -d /data ]]; then
-		mkdir -p /data
-		chattr +C /data || true
-	fi
 }
 
 config_apps() {
@@ -339,19 +389,26 @@ config_apps() {
 
 config_user() {
 	if [[ -n "$SUDO_USER" ]]; then
+		usermod -s /usr/bin/fish $SUDO_USER
+		#usermod -aG libvirt $SUDO_USER
+
 		for service in "${user_services[@]}"; do
 			sudo -u "$SUDO_USER" --preserve-env=DBUS_SESSION_BUS_ADDRESS systemctl --user enable $service
 		done
 
-		usermod -s /usr/bin/fish $SUDO_USER
-		#usermod -aG libvirt $SUDO_USER
-		
 		sudo -u "$SUDO_USER" bash <<-'EOF'
 		if [[ ! -d ~/.minikube ]]; then
 			mkdir ~/.minikube
 			chattr +C ~/.minikube || true
 		fi
 		EOF
+	fi
+}
+
+config_fs() {
+	if [[ ! -d /data ]]; then
+		mkdir -p /data
+		chattr +C /data || true
 	fi
 }
 
@@ -364,13 +421,21 @@ main() {
 			config_system
 			config_apps
 			config_user
+			config_fs
 			;;
 		install-system) install_system ;;
 		install-apps) install_apps ;;
 		install-user) install_user ;;
+		config-all)
+			config_system
+			config_apps
+			config_user
+			config_fs
+			;;			
 		config-system) config_system ;;
 		config-apps) config_apps ;;
 		config-user) config_user ;;
+		config-fs) config_fs ;;
 		install-base) pacman -Syu --needed "${base_packages[@]}" ;;
 		install-desktop) pacman -Syu --needed "${desktop_packages[@]}" ;;
 		install-dev) pacman -Syu --needed "${dev_packages[@]}" ;;
