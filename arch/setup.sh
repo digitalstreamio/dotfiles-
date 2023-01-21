@@ -170,10 +170,12 @@ dev_packages=(
 	maven
 	meson
 	ninja
+	npm
 	podman-docker
 	python-decorator
 	python-poetry
 	slirp4netns
+	sbt
 	tig
 	tokei
 )
@@ -225,7 +227,7 @@ apps=(
 	org.keepassxc.KeePassXC
 	# dev
 	#com.google.AndroidStudio
-	#com.jetbrains.IntelliJ-IDEA-Community
+	com.jetbrains.IntelliJ-IDEA-Community
 	com.visualstudio.code
 	# emulators
 	net.fsuae.FS-UAE
@@ -245,7 +247,6 @@ if [ "$ARCH" == "amd64" ]; then
 		org.chromium.Chromium
 		# dev
 		com.google.AndroidStudio
-		com.jetbrains.IntelliJ-IDEA-Community
 	)
 fi
 

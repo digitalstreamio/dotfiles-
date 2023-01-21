@@ -4,3 +4,4 @@
 
 include /etc/sway/config.d/10-systemd-session.conf
 include $HOME/.config/sway/config.d/*.conf
+include $HOME/.config/sway/$(hostname)/*.conf
