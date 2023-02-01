@@ -64,8 +64,8 @@ map <c-b> mark-remove
 
 map gh cd ~
 map gv cd ~/dev
-map gd cd ~/docs
-map gD cd ~/downloads
+map gd cd ~/Documents
+map gl cd ~/Downloads
 map gm cd ~/media
 
 ## 3/settings
@@ -88,7 +88,7 @@ map D set info
 
 # commands
 
-cmd extract ${{
+cmd ex ${{
     set -f
     case $f in
         *.tar.*) tar xavf $f;;
