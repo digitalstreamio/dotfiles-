@@ -62,11 +62,13 @@ base_packages=(
 	# sys / utils / base
 	fish
 	bat
+	eva
 	exa
 	fd
 	fzf
 	glow
 	jq
+	procs
 	ripgrep
 	tealdeer
 	sudo
@@ -79,6 +81,7 @@ base_packages=(
 	nnn
 	# sys / utils / networking
 	curl
+	dog
 	gnu-netcat
 	inetutils
 	iptables-nft

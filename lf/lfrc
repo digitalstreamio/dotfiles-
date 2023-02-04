@@ -91,7 +91,7 @@ map D set info
 cmd ex ${{
     set -f
     case $f in
-        *.tar.*) tar xavf $f;;
+        *.tar.*) tar xvf $f;;
         *.zip) unzip $f;;
     esac
 }}

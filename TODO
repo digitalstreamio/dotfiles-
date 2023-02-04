@@ -1,4 +1,3 @@
-- systemctl set-default graphical.target
 - arch: secure boot
 - arch: configure monitrc
 

@@ -46,6 +46,8 @@ dev=(
 
 utils=(
     bat
+    dog
+    eva
     exa
     fd
     fish
@@ -57,6 +59,7 @@ utils=(
     mas
     micro
     ncdu
+    procs
     rclone
     ripgrep
     tealdeer
@@ -83,11 +86,10 @@ config_system() {
     sudo systemsetup -settimezone "America/New_York" > /dev/null
     sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist
     sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+    echo “/opt/homebrew/bin/fish” | sudo tee -a /etc/shells
 }
 
 config_user() {
-    launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
-
     # System
     defaults write NSGlobalDomain AppleLanguages -array "en-US"
     defaults write NSGlobalDomain AppleLocale -string "en_US"
@@ -117,11 +119,10 @@ config_user() {
     defaults write com.apple.finder QuitMenuItem -bool true
     defaults write com.apple.finder ShowPathbar -bool false
     defaults write com.apple.finder ShowStatusBar -bool false
-    # Keyboard
-    defaults write com.apple.HIToolbox AppleFnUsageType -int 0
-    # Trackpad/Mouse
+    # Keyboard/Trackpad/Mouse
     defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
     defaults write NSGlobalDomain com.apple.trackpad.scaling -float 1.5
+    defaults write com.apple.HIToolbox AppleFnUsageType -int 0
     # Shortcuts
     defaults write NSGlobalDomain NSUserKeyEquivalents -dict \
         Cut "^x" \
@@ -135,6 +136,8 @@ config_user() {
         "New Window" "^n" \
         "Close Tab" "^w" \
         "Find in Page..." "^f"
+
+    chsh -s /opt/homebrew/bin/fish
 }
 
 config_reset() {

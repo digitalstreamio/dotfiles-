@@ -14,6 +14,8 @@ Spotlight
         Applications
         System Settings             
 Keyboard Shortcuts     
+    Spotlight
+        Show Spotlight search = Opt-Space
     Mission Control
         Move left a space = Ctrl-Cmd-Down
         Move right a space = Ctrl-Cmd-Up
