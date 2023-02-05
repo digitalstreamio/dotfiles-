@@ -112,8 +112,6 @@ desktop_packages=(
 	mako
 	pipewire-pulse
 	wireplumber
-	xdg-desktop-portal-gtk
-	xdg-desktop-portal-wlr
 	xorg-xwayland
 	# desktop / apps
 	alacritty
@@ -124,6 +122,8 @@ desktop_packages=(
 	gnome-keyring
 	grim
 	wl-clipboard
+	xdg-desktop-portal-gtk
+	xdg-desktop-portal-wlr
 	xdg-user-dirs
 	xdg-utils
 	# desktop / assets
@@ -151,7 +151,6 @@ dev_packages=(
 	# dev / ops
 	ansible
 	fabric
-	monit
 	podman
 	terraform
 	#helm

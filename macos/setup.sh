@@ -27,6 +27,7 @@ dev=(
     node
     openjdk
     python@3.10
+    rust
     # ops
     ansible
     fabric
