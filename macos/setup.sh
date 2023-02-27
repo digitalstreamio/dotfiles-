@@ -31,7 +31,9 @@ dev=(
     # ops
     ansible
     fabric
+    minikube
     podman
+    podman-compose
     qemu
     terraform
     # tools
@@ -125,18 +127,18 @@ config_user() {
     defaults write NSGlobalDomain com.apple.trackpad.scaling -float 1.5
     defaults write com.apple.HIToolbox AppleFnUsageType -int 0
     # Shortcuts
-    defaults write NSGlobalDomain NSUserKeyEquivalents -dict \
-        Cut "^x" \
-        Copy "^c" \
-        Paste "^v" \
-        Undo "^z" \
-        Redo "^\$z" \
-        "Select All" "^a"
     defaults write org.mozilla.firefox NSUserKeyEquivalents -dict \
         "New Tab" "^t" \
         "New Window" "^n" \
+        "New Private Window" "^\$n" \
         "Close Tab" "^w" \
-        "Find in Page..." "^f"
+        "Close Window" "^\$w" \
+        "Find in Page..." "^f" \
+        "Find Again" "^g" \
+        "Cut" "^x" \
+        "Copy" "^c" \
+        "Paste" "^v" \
+        "Select All" "^a"
 
     chsh -s /opt/homebrew/bin/fish
 }

@@ -15,9 +15,11 @@ if status is-interactive
     alias cat='bat'
     alias help='tldr'
     alias pv="fzf --preview 'bat --color \"always\" {}'"
-    alias podboot="podman machine start"
+    alias podstart="podman machine start"
+    alias podstop="podman machine stop"
     alias podup="podman start --all"
-    alias poddn="podman stop --all"
+    alias poddown="podman stop --all"
+    
     if test "$(uname)" = "Linux"
         alias cr='chromium'
         alias code='com.visualstudio.code --enable-features=UseOzonePlatform --ozone-platform=wayland'
