@@ -48,25 +48,30 @@ dev=(
 )
 
 utils=(
+	# tui
+    fish
+    micro
+    lf
+    htop
+    lnav
+    ncdu
+    # cli
     bat
     dog
+    dust
     eva
     exa
     fd
-    fish
     fzf
     glow
-    htop
-    lf
-    lnav
-    mas
-    micro
-    ncdu
+    just
     procs
     rclone
     ripgrep
+	sd
     tealdeer
     telnet
+    xh
 )
 
 install_apps() {
