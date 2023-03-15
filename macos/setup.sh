@@ -9,7 +9,6 @@ apps=(
     # utils
     appcleaner
     rectangle
-    zerotier-one
     # dev
     android-studio
     intellij-idea-ce
@@ -45,6 +44,7 @@ dev=(
     tig
     tokei
     wrk
+    zerotier-one
 )
 
 utils=(
