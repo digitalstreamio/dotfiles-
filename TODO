@@ -1,7 +1,2 @@
 - arch: secure boot
-- arch: configure monitrc
-
-handbrake-cli
-mediainfo
-intel-media-driver
-intel-media-sdk
+- handbrake-cli/mediainfo
