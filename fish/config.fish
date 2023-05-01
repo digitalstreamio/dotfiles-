@@ -15,16 +15,14 @@ if status is-interactive
     alias cat='bat'
     alias help='tldr'
     alias pv="fzf --preview 'bat --color \"always\" {}'"
-    alias podstart="podman machine start"
-    alias podstop="podman machine stop"
-    alias podup="podman start --all"
-    alias poddown="podman stop --all"
+    alias podup="podman machine start"
+    alias poddown="podman machine stop"
+    alias podstart="podman start --all"
+    alias podstop="podman stop --all"
     
     if test "$(uname)" = "Linux"
-        alias cr='chromium'
         alias code='com.visualstudio.code --enable-features=UseOzonePlatform --ozone-platform=wayland'
-        alias jd='journalctl'
-        alias sd='systemctl'
+        alias jour='journalctl'
         alias pacq="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
     end
 end

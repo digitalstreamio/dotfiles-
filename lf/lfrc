@@ -6,6 +6,26 @@ set previewer ~/.config/lf/pv.sh
 
 # bindings
 
+## 1/actions
+map q quit
+map w $$SHELL
+map e $$EDITOR "$f"
+map r $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R "$f"
+map <enter> open
+map <f-5> reload
+
+map x cut
+map c copy
+map v paste
+map C clear
+map <delete> delete
+map <f-2> rename
+
+#map $ shell
+#map % shell-pipe
+#map ! shell-wait
+#map & shell-async
+
 ## 1/navigation
 map <up> up    
 map <pgup> page-up
@@ -24,27 +44,6 @@ map <space> :toggle; down
 map a glob-select * 
 map A unselect
 map I invert
-
-## 2/basics
-map q quit
-map w $$SHELL
-map e $$EDITOR "$f"
-map r $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R "$f"
-map <enter> open
-map <f-5> reload
-
-#map $ shell
-#map % shell-pipe
-#map ! shell-wait
-#map & shell-async
-
-## 2/file ops
-map x cut
-map c copy
-map v paste
-map C clear
-map <delete> delete
-map <f-2> rename
 
 # 2/search
 map f find

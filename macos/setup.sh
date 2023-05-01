@@ -4,6 +4,8 @@ apps=(
     # internet
     firefox
     google-chrome
+    # media
+    iina
     # office
     libreoffice
     # utils
@@ -30,19 +32,22 @@ dev=(
     openjdk
     python@3.10
     rust
+    # build
+    cmake
+    maven
+    ninja
+    sbt
     # ops
     ansible
     fabric
+    helm
+	k9s
     podman
     podman-compose
     qemu
     terraform
     # tools
-    cmake
     git-delta
-    maven
-    ninja
-    sbt
     tig
     tokei
     wrk
@@ -50,8 +55,9 @@ dev=(
 )
 
 utils=(
-	# tui
+    # shell
     fish
+	# tui
     micro
     lf
     htop

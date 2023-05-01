@@ -1,6 +1,8 @@
 env:
   TERM: xterm-256color
 
+live_config_reload: true
+
 window:
   opacity: 0.90
   padding:
@@ -72,5 +74,3 @@ colors:
 cursor:
   style: Block
   unfocused_hollow: true
-
-live_config_reload: true

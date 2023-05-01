@@ -13,12 +13,12 @@ case "$(uname --machine)" in
 	aarch64) ARCH="arm64";;
 esac
 
-# base:		950MB/140
-# core:		430MB/95
+# base:		430MB/95
+# core:		950MB/140
 # desktop:	540MB/189
 # dev:		2138MB/208
 
-core_packages_amd64=(
+preinstalled_packages_amd64=(
 	base 
 	linux 
 	linux-firmware 
@@ -30,7 +30,7 @@ core_packages_amd64=(
 	openssh
 )
 
-core_packages_arm64=(
+preinstalled_packages_arm64=(
 	archlinuxarm-keyring
 	asahi-fwextract
 	asahi-meta
@@ -59,46 +59,6 @@ base_packages=(
 	openssh
 	power-profiles-daemon
 	#fwupd
-	# sys / utils / base
-	fish
-	bat
-	eva
-	exa
-	fd
-	fzf
-	glow
-	jq
-	procs
-	ripgrep
-	tealdeer
-	sudo
-	# sys / utils / tui
-	atop
-	htop
-	micro
-	lnav
-	ncdu
-	nnn
-	# sys / utils / networking
-	curl
-	dog
-	gnu-netcat
-	inetutils
-	iptables-nft
-	rclone
-	rsync
-	sshfs
-	tcpdump
-	# sys / utils/ misc
-	lostfiles
-	man-db
-	man-pages
-	pacman-contrib
-	pacutils
-	pkgfile
-	unzip
-	usbutils
-	zram-generator
 )
 
 desktop_packages=(
@@ -109,6 +69,7 @@ desktop_packages=(
 	swaylock
 	waybar
 	wofi
+	greetd
 	mako
 	pipewire-pulse
 	wireplumber
@@ -148,36 +109,29 @@ dev_packages=(
 	nodejs-lts-fermium
 	python
 	#rustup
-	# dev / ops
-	ansible
-	fabric
-	podman
-	terraform
-	#helm
-	#minikube
-	#kompose
-	#kubectl
-	# dev / virt
-	#libvirt
-	#qemu-desktop
-	#virt-install
-	# dev / utils
+	# dev / build
 	cmake
-	dnsmasq
-	#edk2-ovmf
-	#edk2-shell
-	fuse-overlayfs
-	git-delta
-	github-cli
 	maven
 	meson
 	ninja
 	npm
-	podman-docker
-	python-decorator
 	python-poetry
-	slirp4netns
 	sbt
+	# dev / ops
+	ansible
+	fabric
+	helm
+	k9s
+	podman
+	podman-compose
+	terraform
+	# dev / utils
+	dnsmasq
+	fuse-overlayfs
+	git-delta
+	github-cli
+	python-decorator
+	slirp4netns
 	tig
 	tokei
 )
@@ -195,12 +149,53 @@ if [ "$ARCH" == "amd64" ]; then
 	)
 fi
 
-aur_packages=(
-	# system
+utils_packages=(
+	# utils / shell
+	fish
+	# utils / tui
+	atop
+	htop
+	micro
 	lf
+	lnav
+	ncdu
+	# utils / cli
+	bat
+	dust
+	eva
+	exa
+	fd
+	fzf
+	glow
+	jq
+	just
+	procs
+	ripgrep
+	sd
+	tealdeer
+	# utils / networking
+	curl
+	dog
+	gnu-netcat
+	inetutils
+	iptables-nft
+	rclone
+	rsync
+	sshfs
+	tcpdump
+	# utils/ misc
+	lostfiles
+	man-db
+	man-pages
+	pacman-contrib
+	pacutils
+	pkgfile
+	zram-generator
+)
+
+aur_packages=(
 	# desktop
 	corrupter-git
-	greetd
 	sway-systemd
 )
 
@@ -222,7 +217,6 @@ apps=(
 	# office
 	org.libreoffice.LibreOffice
 	# utils
-	org.gnome.Calculator
 	org.gnome.Evince
 	org.gnome.eog
 	org.gnome.meld
@@ -329,7 +323,7 @@ vscode_extensions=(
 )
 
 install_system() {
-	pacman -Syu --needed "${base_packages[@]}" "${desktop_packages[@]}" "${dev_packages[@]}"
+	pacman -Syu --needed "${base_packages[@]}" "${utils_packages[@]}"  "${desktop_packages[@]}" "${dev_packages[@]}"
 	if [[ -n "$SUDO_USER" ]] && ! command -v yay &> /dev/null; then
 		sudo -u "$SUDO_USER" bash <<-'EOF'
 		set -euxo pipefail
