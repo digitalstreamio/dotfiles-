@@ -4,7 +4,7 @@
 
 Based on https://inteltechniques.com/ventura.html
 
-- Bluetooth > Bluetooth = Disabled
+x Bluetooth > Bluetooth = Disabled
 - Network > Firewall > Firewall = Enabled
 - General > Date & Time > Source = pool.ntp.org
 - General > Sharing > Each app = Disabled

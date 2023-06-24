@@ -155,8 +155,8 @@ utils_packages=(
 	# utils / tui
 	atop
 	htop
-	micro
 	lf
+	micro
 	lnav
 	ncdu
 	# utils / cli

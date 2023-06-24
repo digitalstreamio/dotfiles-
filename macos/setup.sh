@@ -9,10 +9,9 @@ apps=(
     # office
     libreoffice
     # utils
-    aldente
-    alfred
     appcleaner
     keepassxc
+    raycast
     rectangle
     # dev
     android-studio
@@ -58,8 +57,8 @@ utils=(
     # shell
     fish
 	# tui
-    micro
     lf
+    micro
     htop
     lnav
     ncdu
