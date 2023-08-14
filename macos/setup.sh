@@ -106,11 +106,11 @@ config_user() {
     # Dock
     defaults write com.apple.Dock autohide -bool true
     defaults write com.apple.Dock autohide-delay -float 0.1
-    defaults write com.apple.Dock autohide-time-modifier -float 0
+    defaults write com.apple.Dock autohide-time-modifier -float 0.5
     defaults write com.apple.Dock show-process-indicators -bool true
     defaults write com.apple.Dock wvous-bl-corner -int 1
     defaults write com.apple.dock wvous-bl-modifier -int 0
-    defaults write com.apple.Dock wvous-br-corner -int 13
+    defaults write com.apple.Dock wvous-br-corner -int 1
     defaults write com.apple.dock wvous-br-modifier -int 0
     defaults write com.apple.Dock wvous-tl-corner -int 2
     defaults write com.apple.dock wvous-tl-modifier -int 0
