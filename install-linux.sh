@@ -1,7 +1,7 @@
 #!/bin/sh
 cp -r * ~/.config/
 cp -r app ~/.var/
-cp -r xdg/applications ~/.local/share/
+cp -r xdg/fedora/applications ~/.local/share/
 cp .profile ~/.profile
 
 # fisher install jethrokuan/z

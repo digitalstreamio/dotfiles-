@@ -13,8 +13,8 @@ scrolling:
   history: 10000
 
 font:
-  normal:
-    family: Monaco
+  #normal:
+    #family: Monaco
   size: 12
 
 # Colors (Pink Moon)

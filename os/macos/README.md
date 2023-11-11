@@ -35,15 +35,11 @@ x Bluetooth > Bluetooth = Disabled
     - browser.newtabpage.enabled = false
     - browser.cache.disk.enable = false
     - browser.cache.memory.capacity = 65536
-    - dom.ipc.processCount = 2
-    - dom.ipc.processCount.webIsolated = 6
+    - dom.ipc.processCount = 4
+    - dom.ipc.processCount.webIsolated = 4
     - dom.ipc.processPrelaunch.enabled = false
     - extensions.pocket.enabled = false
     - gfx.webrender.all = true
-    - media.av1.enabled = false
-    - media.hardware-video-decoding.force-enabled = true
-    - media.webm.enabled = false
 - Extensions
-    - Command Palette
     - Firefox Multi-Account Container
     - uBlock Origin

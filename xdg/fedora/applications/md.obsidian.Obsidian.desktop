@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Obsidian (Wayland)
+Exec=/usr/bin/flatpak run --branch=stable --arch=aarch64 --command=obsidian.sh --file-forwarding --socket=wayland md.obsidian.Obsidian --ozone-platform-hint=auto @@u %U @@
+Terminal=false
+Type=Application
+Icon=md.obsidian.Obsidian 
+StartupWMClass=obsidian
+Comment=Obsidian
+MimeType=x-scheme-handler/obsidian;
+Categories=Office;
+X-Flatpak-Tags=proprietary;
+X-Flatpak=md.obsidian.Obsidian

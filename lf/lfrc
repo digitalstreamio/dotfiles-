@@ -4,46 +4,63 @@ set infotimefmtold "2006-01-02 15:04"
 set timefmt "2006-01-02 15:04"
 set previewer ~/.config/lf/pv.sh
 
+cmd doc $$lf -doc | $PAGER
+
 # bindings
 
-## 1/actions
+## 1/basic
 map q quit
 map w $$SHELL
 map e $$EDITOR "$f"
 map r $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R "$f"
 map <enter> open
-map <f-5> reload
+map <c-r> reload
 
 map x cut
 map c copy
 map v paste
 map C clear
 map <delete> delete
-map <f-2> rename
 
 #map $ shell
 #map % shell-pipe
 #map ! shell-wait
 #map & shell-async
 
-## 1/navigation
-map <up> up    
-map <pgup> page-up
-map <c-u> half-up
-map <c-y> scroll-up
-map <down> down
-map <pgdn> page-down
-map <c-d> half-down                
-map <c-e> scroll-down         
-map <home> top
-map <end> bottom
-map <left> updir
+map <f-1> doc
+map <f-2> rename
+#map <f-3> $LESSOPEN='| ~/.config/lf/pv.sh %s' less -R "$f"
+map <f-4> $$EDITOR "$f"
+map <f-5> copy
+map <f-6> cut
+map <f-7> mkdir
+map <f-8> delete
+map <f-10> quit
 
 ## 1/selection
 map <space> :toggle; down
 map a glob-select * 
 map A unselect
 map I invert
+
+## 1/navigation
+map <up> up    
+map <down> down
+map <left> updir
+map <right> open
+map <home> top
+map <end> bottom
+map <pgup> page-up
+map <pgdn> page-down
+map <c-u> half-up
+map <c-d> half-down                
+map <c-y> scroll-up
+map <c-e> scroll-down    
+
+# 2/bookmarks
+map b mark-load 
+map B mark-save
+map <c-b> mark-remove
 
 # 2/search
 map f find
@@ -56,22 +73,11 @@ map ? search-back
 map n search-next
 map N search-prev
 
-# 2/shortcuts
-map b mark-load 
-map B mark-save
-map <c-b> mark-remove
-
-map gh cd ~
-map gv cd ~/dev
-map gd cd ~/Documents
-map gl cd ~/Downloads
-map gm cd ~/media
-
-## 3/settings
+## 2/settings
 map zh set hidden!
 map zr set reverse!
 map zn set info
-map zs set info size
+map zs set info sizehelp
 map zt set info time
 map za set info size:time
 map sn :set sortby natural; set info
@@ -84,6 +90,12 @@ map se :set sortby ext; set info
 map . set hidden!
 map d set info size:time
 map D set info
+
+# 2/shortcuts
+map gh cd ~
+map gdo cd ~/Documents
+map gdl cd ~/Downloads
+map gdv cd ~/dev
 
 # commands
 

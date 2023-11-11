@@ -1,35 +1,51 @@
 * {
-  font-family: Sans;
+  font-family: "Fira Sans";
   font-size: 18px;
 }
 
 #window {
-  background-color: rgba(--wofi-rgb-color1, 0.94);
-  border: 3px solid rgba(--wofi-rgb-color1, 0.94);
+  background-color: rgba(--wofi-rgb-color0, 0.9);
+  border: 2px solid rgba(--wofi-rgb-color1, 0.9);
 }
 
 #outer-box {
-  background-color: rgba(--wofi-rgb-color2, 0.9);
-  padding: 5px;
+  padding: 8px;
 }
 
 #inner-box {
-  margin: 2px;
+  margin-top: 5px;
 }
 
 #input {
   background-color: transparent;
   border: none;
-  border-radius: 3px;
-  color: white;
+  border-bottom: 2px solid rgba(--wofi-rgb-color1, 0.9);
+  color: #f8f8f2;
   margin: 3px;
-  padding: 3px;
+  padding: 5px;
 }
 
 #input image:first-child {
-  margin-left: 3px;
+  margin-left: 5px;
 }
 
 #input image:last-child {
-  margin-right: 3px;
+  margin-right: 5px;
+}
+
+#entry.activatable #text {
+  color: #282a36;
+}
+
+#entry > * {
+  color: #f8f8f2;
+}
+
+#entry:selected {
+  background-color: rgba(--wofi-rgb-color2, 0.5);
+}
+
+#text {
+  color: #f8f8f2;
+  margin: 10px;
 }

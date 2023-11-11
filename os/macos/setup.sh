@@ -1,19 +1,22 @@
 #!/usr/bin/env bash
 
 apps=(
-    # internet
+    # app / internet
     firefox
     google-chrome
-    # media
+    freetube
+    nheko
+    # app / media
     iina
-    # office
+    # app / office
     libreoffice
-    # utils
+    obsidian
+    # app / utils
     appcleaner
     keepassxc
     raycast
     rectangle
-    # dev
+    # app / dev
     android-studio
     intellij-idea-ce
     visual-studio-code
@@ -25,18 +28,18 @@ appstore=(
 )
 
 dev=(
-    # lang
+    # dev / lang
     go
     node
     openjdk
     python@3.10
     rust
-    # build
+    # dev / build
     cmake
     maven
     ninja
     sbt
-    # ops
+    # dev / ops
     ansible
     fabric
     helm
@@ -45,7 +48,7 @@ dev=(
     podman-compose
     qemu
     terraform
-    # tools
+    # dev / tools
     git-delta
     tig
     tokei
@@ -54,31 +57,31 @@ dev=(
 )
 
 utils=(
-    # shell
+    # util / shell
     fish
-	# tui
+	# util / tui
     lf
     micro
     htop
     lnav
     ncdu
-    # cli
+    # util / cli
     bat
+    fzf
+    just
+    procs
+    rclone
+    ripgrep
+    tealdeer
+    telnet
+    xh
     dog
     dust
     eva
     exa
     fd
-    fzf
     glow
-    just
-    procs
-    rclone
-    ripgrep
 	sd
-    tealdeer
-    telnet
-    xh
 )
 
 config_system() {

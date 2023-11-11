@@ -1,5 +1,10 @@
 ignore-empty-password
-font=Sans
+
+font="Fira Sans Semibold"
+
+image=~/.config/bg/ventura-graphic.jpg
+scaling=fill
+
 indicator-radius=120
 indicator-thickness=60
 indicator-caps-lock
@@ -22,11 +27,10 @@ line-caps-lock-color=009ddcFF
 line-ver-color=d9d8d8FF
 line-wrong-color=ee2e24FF
 
-text-color=009ddc00
-text-clear-color=ffd20400
-text-caps-lock-color=009ddc00
-text-ver-color=d9d8d800
-text-wrong-color=ee2e2400
+text-color=ffffff
+text-clear-color=ffffff
+text-ver-color=ffffff
+text-wrong-color=ffffff
 
 key-hl-color=009ddcFF
 bs-hl-color=ee2e24FF
