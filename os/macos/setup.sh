@@ -32,7 +32,7 @@ dev=(
     go
     node
     openjdk
-    python@3.10
+    python
     rust
     # dev / build
     cmake
@@ -49,6 +49,7 @@ dev=(
     qemu
     terraform
     # dev / tools
+    git
     git-delta
     tig
     tokei
@@ -72,6 +73,7 @@ utils=(
     procs
     rclone
     ripgrep
+    sd
     tealdeer
     telnet
     xh
@@ -81,7 +83,6 @@ utils=(
     exa
     fd
     glow
-	sd
 )
 
 config_system() {
