@@ -163,7 +163,8 @@ sys_services_enable=(
 )
 
 user_services=(
-	waybar.service
+    ssh-agent.service
+    waybar.service
 )
 
 install_binary() {
