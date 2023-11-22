@@ -107,13 +107,13 @@ dev_packages=(
     java-17-openjdk-devel
     python3
     rust
-    #golang
+    golang
     #nodejs
     # dev / build
     cargo
     cmake
     make
-    #sbt
+    sbt
     # dev / ops
     ansible
     helm
