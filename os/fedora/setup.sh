@@ -76,7 +76,6 @@ util_packages=(
     #lf
     micro
     atop
-    btop
     htop
     lnav
     ncdu
@@ -84,6 +83,7 @@ util_packages=(
     bat
     fzf
     just
+    mediainfo
     procs
     rclone
     ripgrep
@@ -104,10 +104,10 @@ util_builds=(
 dev_packages=(
     # dev / lang
     clang
+    golang
     java-17-openjdk-devel
     python3
     rust
-    golang
     #nodejs
     # dev / build
     cargo
@@ -123,9 +123,9 @@ dev_packages=(
     #terraform
     # dev / tools
     git
+    gitui
     git-delta
-    mediainfo
-    tig
+    python3-ipython
     tokei
     #wrk
     # dev / libraries

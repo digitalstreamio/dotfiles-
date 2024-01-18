@@ -27,36 +27,6 @@ appstore=(
     408981434 
 )
 
-dev=(
-    # dev / lang
-    go
-    node
-    openjdk
-    python
-    rust
-    # dev / build
-    cmake
-    maven
-    ninja
-    sbt
-    # dev / ops
-    ansible
-    fabric
-    helm
-	k9s
-    podman
-    podman-compose
-    qemu
-    terraform
-    # dev / tools
-    git
-    git-delta
-    tig
-    tokei
-    wrk
-    zerotier-one
-)
-
 utils=(
     # util / shell
     fish
@@ -83,6 +53,37 @@ utils=(
     exa
     fd
     glow
+)
+
+dev=(
+    # dev / lang
+    go
+    node
+    openjdk
+    python
+    rust
+    # dev / build
+    cmake
+    maven
+    ninja
+    sbt
+    # dev / ops
+    ansible
+    fabric
+    helm
+	k9s
+    podman
+    podman-compose
+    qemu
+    terraform
+    # dev / tools
+    git
+    gitui
+    git-delta
+    ipython
+    tokei
+    wrk
+    zerotier-one
 )
 
 config_system() {
