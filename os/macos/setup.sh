@@ -4,10 +4,14 @@ apps=(
     # app / internet
     firefox
     google-chrome
-    freetube
+    chatgpt
     nheko
+    zoom
     # app / media
+    freetube
+    calibre
     iina
+    spotify
     # app / office
     libreoffice
     obsidian
@@ -18,13 +22,17 @@ apps=(
     rectangle
     # app / dev
     android-studio
+    clion
     intellij-idea-ce
     visual-studio-code
+    zed
 )
 
 appstore=(
     # iMovie
     408981434 
+    # Wireguard
+    1441195209
 )
 
 utils=(
@@ -38,6 +46,8 @@ utils=(
     ncdu
     # util / cli
     bat
+    croc
+    fd
     fzf
     just
     procs
@@ -48,10 +58,6 @@ utils=(
     telnet
     xh
     dog
-    dust
-    eva
-    exa
-    fd
     glow
 )
 
@@ -96,9 +102,6 @@ config_system() {
 }
 
 config_user() {
-    # System
-    defaults write NSGlobalDomain AppleLanguages -array "en-US"
-    defaults write NSGlobalDomain AppleLocale -string "en_US"
     # Appearance
     defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
     # Enable subpixel font rendering on non-Apple LCDs
@@ -137,11 +140,7 @@ config_user() {
         "Close Tab" "^w" \
         "Close Window" "^\$w" \
         "Find in Page..." "^f" \
-        "Find Again" "^g" \
-        "Cut" "^x" \
-        "Copy" "^c" \
-        "Paste" "^v" \
-        "Select All" "^a"
+        "Find Again" "^g" 
 
     chsh -s /opt/homebrew/bin/fish
     

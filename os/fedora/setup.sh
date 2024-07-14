@@ -45,11 +45,14 @@ app_flatpaks=(
     # app / internet
     #org.mozilla.firefox
     #org.chromium.Chromium
-    io.freetubeapp.FreeTube 
     io.github.NhekoReborn.Nheko
+    #us.zoom.Zoom
     # multimedia
+    io.freetubeapp.FreeTube 
+    com.calibre_ebook.calibre
     io.mpv.Mpv
     org.gimp.GIMP
+    #com.spotify.Client
     # app / office
     #org.libreoffice.LibreOffice
     md.obsidian.Obsidian
@@ -81,9 +84,10 @@ util_packages=(
     ncdu
     # util / cli
     bat
+    croc
+    fd-find
     fzf
     just
-    mediainfo
     procs
     rclone
     ripgrep
@@ -94,7 +98,7 @@ util_packages=(
 )
 
 util_bins=(
-    "lf https://github.com/gokcehan/lf/releases/download/r30/lf-linux-arm64.tar.gz"
+    "lf https://github.com/gokcehan/lf/releases/download/r32/lf-linux-arm64.tar.gz"
 )
 
 util_builds=(
@@ -118,9 +122,9 @@ dev_packages=(
     ansible
     helm
     #k9s
+    opentofu
     podman
     podman-compose
-    #terraform
     # dev / tools
     git
     gitui
@@ -133,7 +137,7 @@ dev_packages=(
 )
 
 dev_bins=(
-    "k9s https://github.com/derailed/k9s/releases/download/v0.27.4/k9s_Linux_arm64.tar.gz"
+    "k9s https://github.com/derailed/k9s/releases/download/v0.32.5/k9s_Linux_arm64.tar.gz"
 )
 
 dev_ext_vscode=(
