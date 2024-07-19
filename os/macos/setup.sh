@@ -33,6 +33,8 @@ appstore=(
     408981434 
     # Wireguard
     1441195209
+    # Xcode
+    497799835
 )
 
 utils=(

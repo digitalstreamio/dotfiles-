@@ -3,6 +3,7 @@ if status is-interactive
     if test "$(uname)" = "Darwin"
         eval "$(/opt/homebrew/bin/brew shellenv)"
         fish_add_path "$HOME/.cargo/bin"
+        fish_add_path "$HOME/.gem/bin"
         fish_add_path "$HOME/Library/Python/3.10/bin"
         set -gx JAVA_HOME "$(/usr/libexec/java_home -v 11)"
     end
