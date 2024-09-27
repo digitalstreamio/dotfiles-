@@ -4,17 +4,19 @@ apps=(
     # app / internet
     firefox
     google-chrome
-    chatgpt
     nheko
     zoom
     # app / media
     freetube
     calibre
+    gyroflow
     iina
     spotify
-    # app / office
+    # app / productivity
     libreoffice
     obsidian
+    chatgpt
+    ollamac
     # app / utils
     appcleaner
     keepassxc
@@ -29,6 +31,8 @@ apps=(
 )
 
 appstore=(
+    # DaVinci Resolve
+    571213070
     # iMovie
     408981434 
     # Wireguard
@@ -46,21 +50,19 @@ utils=(
     htop
     lnav
     ncdu
-    # util / cli
-    bat
+    # util / net
     croc
+    rclone
+    xh
+    # util / sys
+    bat
     fd
     fzf
     just
     procs
-    rclone
     ripgrep
     sd
     tealdeer
-    telnet
-    xh
-    dog
-    glow
 )
 
 dev=(
@@ -89,6 +91,8 @@ dev=(
     gitui
     git-delta
     ipython
+    ollama
+    telnet
     tokei
     wrk
     zerotier-one
@@ -98,8 +102,6 @@ config_system() {
     sudo systemsetup -settimezone "America/New_York" > /dev/null
     sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist
     sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
-    echo “/opt/homebrew/bin/fish” | sudo tee -a /etc/shells
-
     disable_spotlight
 }
 

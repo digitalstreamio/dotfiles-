@@ -82,19 +82,19 @@ util_packages=(
     htop
     lnav
     ncdu
-    # util / cli
-    bat
+    # util / net
     croc
+    rclone
+    #xh
+    # util / sys
+    bat
     fd-find
     fzf
     just
     procs
-    rclone
     ripgrep
     sd
     tealdeer
-    telnet
-    #xh
 )
 
 util_bins=(
@@ -130,6 +130,7 @@ dev_packages=(
     gitui
     git-delta
     python3-ipython
+    telnet
     tokei
     #wrk
     # dev / libraries

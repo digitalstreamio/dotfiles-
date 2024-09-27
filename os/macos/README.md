@@ -4,7 +4,6 @@
 
 Based on https://inteltechniques.com/ventura.html
 
-x Bluetooth > Bluetooth = Disabled
 - Network > Firewall > Firewall = Enabled
 - General > Date & Time > Source = pool.ntp.org
 - General > Sharing > Each app = Disabled
@@ -43,3 +42,6 @@ x Bluetooth > Bluetooth = Disabled
 - Extensions
     - Firefox Multi-Account Container
     - uBlock Origin
+- Themes
+    - Colorful Abstract Neon
+
