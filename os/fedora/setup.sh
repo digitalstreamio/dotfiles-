@@ -78,10 +78,7 @@ util_packages=(
     # util / tui
     #lf
     micro
-    atop
-    htop
     lnav
-    ncdu
     # util / net
     croc
     rclone
@@ -95,6 +92,11 @@ util_packages=(
     ripgrep
     sd
     tealdeer
+    # util / sysinfo
+    atop
+    btop
+    htop
+    ncdu
 )
 
 util_bins=(
@@ -118,6 +120,8 @@ dev_packages=(
     cmake
     make
     sbt
+    # dev / llm
+    ollama
     # dev / ops
     ansible
     helm
@@ -144,15 +148,34 @@ dev_bins=(
 dev_ext_vscode=(
     # langs
     dart-code.flutter
+    golang.go
     ms-python.vscode-pylance
     rust-lang.rust-analyzer
+    scalameta.metals
+    sswg.swift-lang
     # ops
     redhat.ansible
     ms-azuretools.vscode-docker
-    HashiCorp.terraform
+    hashicorp.terraform
     # tools
+    continue.continue
     eamodio.gitlens
+    ms-toolsai.jupyter
+    skellock.just
     ms-python.black-formatter
+    # web
+    formulahendry.auto-rename-tag
+    dsznajder.es7-react-js-snippets
+    vincaslt.highlight-matching-tag
+    wix.glean
+    esbenp.prettier-vscode
+    bradlc.vscode-tailwindcss
+)
+
+dev_llm=(
+    llama3.1:8b-instruct-q8_0
+    qwen2.5-coder:7b-instruct-q8_0
+    starcoder2:3b
 )
 
 sys_services_disable=(
