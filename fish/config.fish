@@ -1,7 +1,7 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
     if test "$(uname)" = "Darwin"
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+        eval "$(/opt/homebrew/bin/brew shellenv fish)"
         fish_add_path "$HOME/.cargo/bin"
         fish_add_path "$HOME/.gem/bin"
         fish_add_path "$HOME/Library/Python/3.10/bin"

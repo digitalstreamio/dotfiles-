@@ -1,0 +1,5 @@
+mkdir -p /Users/Shared/ollama
+sudo mv ~/.ollama/models /Users/Shared/ollama/
+chown -R $USER /Users/Shared/ollama/models
+chmod 755 /Users/Shared/ollama/models
+ln -s /Users/Shared/ollama/models ~/.ollama/models

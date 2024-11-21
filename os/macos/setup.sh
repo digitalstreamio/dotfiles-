@@ -1,28 +1,30 @@
 #!/usr/bin/env bash
 
 apps=(
-    # app / internet
+    # internet
     firefox
     google-chrome
     nheko
     zoom
-    # app / media
+    # media
     freetube
+    spotify
     calibre
     gyroflow
+    handbrake
     iina
-    spotify
-    # app / productivity
+    # productivity
     libreoffice
     obsidian
     chatgpt
     ollamac
-    # app / utils
+    # utils
     appcleaner
     keepassxc
+    menumeters
     raycast
     rectangle
-    # app / dev
+    # dev
     android-studio
     clion
     intellij-idea-ce
@@ -42,17 +44,16 @@ appstore=(
 )
 
 utils=(
-    # util / shell
+	# essential
     fish
-	# util / tui
     lf
     micro
     lnav
-    # util / net
+    # net
     croc
     rclone
     xh
-    # util / sys
+    # sys
     bat
     fd
     fzf
@@ -61,27 +62,28 @@ utils=(
     ripgrep
     sd
     tealdeer
-    # util / sysinfo
+    # sysinfo
     btop
     htop
     ncdu
 )
 
 dev=(
-    # dev / lang
+    # lang
     go
-    node
+    node@18
+    node@22
     openjdk
     python
     rust
-    # dev / build
+    # build
     cmake
     maven
     ninja
     sbt
-    # dev / llm
+    # llm
     ollama
-    # dev / ops
+    # ops
     ansible
     fabric
     helm
@@ -90,7 +92,7 @@ dev=(
     podman-compose
     qemu
     terraform
-    # dev / tools
+    # tools
     git
     gitui
     git-delta
@@ -129,9 +131,9 @@ dev_ext_vscode=(
 )
 
 dev_llm=(
-    llama3.1:8b-instruct-q8_0
-    qwen2.5-coder:7b-instruct-q8_0
-    starcoder2:3b
+    llama3.1:8b-instruct-fp16
+    qwen2.5-coder:32b-instruct-q5_K_M
+    starcoder2:3b-q4_K_M
 )
 
 install_dev_ext() {

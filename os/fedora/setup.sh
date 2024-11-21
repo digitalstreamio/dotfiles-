@@ -20,29 +20,29 @@ repos=(
 desktop_group=sway-desktop-environment
 
 desktop_packages=(
-    # desktop / core
+    # core
     sddm-wayland-sway
     wofi
-    # desktop / apps
+    # apps
     alacritty
-    # desktop / utils
+    # utils
     brightnessctl
     blueman
     flatpak
     gnome-keyring
     pavucontrol
-    # desktop / assets
+    # assets
     mozilla-fira-sans-fonts
 )
 
 app_packages=(
-    # app / internet
+    # internet
     firefox
     chromium
 )
 
 app_flatpaks=(
-    # app / internet
+    # internet
     #org.mozilla.firefox
     #org.chromium.Chromium
     io.github.NhekoReborn.Nheko
@@ -50,40 +50,40 @@ app_flatpaks=(
     # multimedia
     io.freetubeapp.FreeTube 
     com.calibre_ebook.calibre
-    io.mpv.Mpv
+    #fr.handbrake.ghb
     org.gimp.GIMP
+    io.mpv.Mpv
     #com.spotify.Client
-    # app / office
-    #org.libreoffice.LibreOffice
+    # productivity
     md.obsidian.Obsidian
+    #org.libreoffice.LibreOffice
     # utils
     org.gnome.Evince
     org.gnome.eog
     org.gnome.meld
     org.keepassxc.KeePassXC
-    # app / dev
+    # dev
     #com.google.AndroidStudio
     com.jetbrains.IntelliJ-IDEA-Community
     com.visualstudio.code
-    # app / emulators
+    # emulators
     net.fsuae.FS-UAE
     net.sf.VICE
-    # ext / sys
+    # sysext
     org.gtk.Gtk3theme.Adwaita-dark
 )
 
 util_packages=(
-    # util / shell
+    # essential
     fish
-    # util / tui
     #lf
     micro
     lnav
-    # util / net
+    # net
     croc
     rclone
     #xh
-    # util / sys
+    # sys
     bat
     fd-find
     fzf
@@ -92,7 +92,7 @@ util_packages=(
     ripgrep
     sd
     tealdeer
-    # util / sysinfo
+    # sysinfo
     atop
     btop
     htop
@@ -108,28 +108,28 @@ util_builds=(
 )
 
 dev_packages=(
-    # dev / lang
+    # lang
     clang
     golang
     java-17-openjdk-devel
     python3
     rust
     #nodejs
-    # dev / build
+    # build
     cargo
     cmake
     make
     sbt
-    # dev / llm
+    # llm
     ollama
-    # dev / ops
+    # ops
     ansible
     helm
     #k9s
     opentofu
     podman
     podman-compose
-    # dev / tools
+    # tools
     git
     gitui
     git-delta
@@ -137,7 +137,7 @@ dev_packages=(
     telnet
     tokei
     #wrk
-    # dev / libraries
+    # libraries
     openssl-devel
 )
 
@@ -173,9 +173,9 @@ dev_ext_vscode=(
 )
 
 dev_llm=(
-    llama3.1:8b-instruct-q8_0
-    qwen2.5-coder:7b-instruct-q8_0
-    starcoder2:3b
+    llama3.1:8b-instruct-fp16
+    qwen2.5-coder:32b-instruct-q5_K_M
+    starcoder2:3b-q4_K_M
 )
 
 sys_services_disable=(
