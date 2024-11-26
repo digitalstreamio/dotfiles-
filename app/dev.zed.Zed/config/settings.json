@@ -1,0 +1,65 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  // Theme
+  "theme": "Base16 Zenburn Mod",
+  "buffer_font_family": "Monaco", // Zed Plex Mono", // "CommitMono Nerd Font",
+  "buffer_font_size": 13,
+  "buffer_line_height": "standard",
+  // Editing
+  "preferred_line_length": 100,
+  "soft_wrap": "preferred_line_length",
+  "tab_size": 2,
+  // UI
+  "cursor_blink": false,
+  "project_panel": {
+    "button": false,
+    "auto_fold_dirs": false,
+    "scrollbar": {
+      "show": "auto"
+    }
+  },
+  "outline_panel": {
+    "button": false
+  },
+  "scrollbar": {
+    "show": "auto"
+  },
+  "terminal": {
+    "alternate_scroll": "off",
+    "blinking": "terminal_controlled",
+    "copy_on_select": true,
+    "font_family": "CommitMono Nerd Font",
+    "line_height": "standard",
+    "toolbar": {
+      "title": true
+    },
+    "working_directory": "current_project_directory",
+    "button": false
+  },
+  "tab_bar": {
+    "show": false
+  },
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": false
+  },
+  // AI
+  "assistant": {
+    "version": "2",
+    "button": false,
+    "default_model": {
+      "provider": "ollama",
+      "model": "qwen2.5-coder:32b-instruct-q5_K_M"
+    }
+  },
+  "features": {
+    "copilot": false
+  }
+}
