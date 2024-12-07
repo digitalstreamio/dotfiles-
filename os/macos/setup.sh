@@ -71,9 +71,8 @@ utils=(
 dev=(
     # lang
     go
-    node@18
     node@22
-    openjdk
+    openjdk@11
     python
     rust
     # build

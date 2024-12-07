@@ -5,17 +5,18 @@ if status is-interactive
         fish_add_path "$HOME/.cargo/bin"
         fish_add_path "$HOME/.gem/bin"
         fish_add_path "$HOME/Library/Python/3.10/bin"
-        set -gx JAVA_HOME "$(/usr/libexec/java_home -v 11)"
+        fish_add_path "/opt/homebrew/opt/node@22/bin"
+        fish_add_path "/opt/homebrew/opt/openjdk@11/bin"
     end
 
     # Aliases
     alias cat='bat'
     alias help='tldr'
     alias pv="fzf --preview 'bat --color \"always\" {}'"
-    alias podup="podman machine start"
-    alias poddown="podman machine stop"
-    alias podstart="podman start --all"
-    alias podstop="podman stop --all"
+    alias podstart="podman machine start"
+    alias podstop="podman machine stop"
+    alias podup="podman start --all"
+    alias poddown="podman stop --all"
     
     if test "$(uname)" = "Linux"
         alias code='com.visualstudio.code --ozone-platform-hint=auto'
