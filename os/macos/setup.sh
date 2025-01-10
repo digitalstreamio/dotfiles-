@@ -14,22 +14,20 @@ apps=(
     handbrake
     iina
     # productivity
-    libreoffice
     obsidian
     chatgpt
+    lm-studio
     ollamac
     # utils
-    appcleaner
     keepassxc
     menumeters
-    raycast
     rectangle
+    #verve
     # dev
+    zed
     android-studio
     clion
     intellij-idea-ce
-    visual-studio-code
-    zed
 )
 
 appstore=(
@@ -77,8 +75,10 @@ dev=(
     rust
     # build
     cmake
+    coursier
     maven
     ninja
+    pnpm
     sbt
     # llm
     ollama
@@ -102,46 +102,10 @@ dev=(
     zerotier-one
 )
 
-dev_ext_vscode=(
-    # langs
-    dart-code.flutter
-    golang.go
-    ms-python.vscode-pylance
-    rust-lang.rust-analyzer
-    scalameta.metals
-    sswg.swift-lang
-    # ops
-    redhat.ansible
-    ms-azuretools.vscode-docker
-    hashicorp.terraform
-    # tools
-    continue.continue
-    eamodio.gitlens
-    ms-toolsai.jupyter
-    skellock.just
-    ms-python.black-formatter
-    # web
-    formulahendry.auto-rename-tag
-    dsznajder.es7-react-js-snippets
-    vincaslt.highlight-matching-tag
-    wix.glean
-    esbenp.prettier-vscode
-    bradlc.vscode-tailwindcss
-)
-
 dev_llm=(
-    llama3.1:8b-instruct-fp16
-    qwen2.5-coder:32b-instruct-q5_K_M
-    starcoder2:3b-q4_K_M
+    llama3.1:8b-instruct-q8_0
+    phi4:14b
 )
-
-install_dev_ext() {
-    if command -v code &> /dev/null; then
-        for ext in "${dev_ext_vscode[@]}"; do
-            code --install-extension $ext
-        done
-    fi
-}
 
 install_dev_llm() {
     if command -v code &> /dev/null; then
@@ -246,7 +210,6 @@ main() {
 		install-apps) brew install --cask "${apps[@]}" ;;
         install-appstore) mas install "${appstore[@]}" ;;
 		install-dev) brew install "${dev[@]}" ;;
-        install-dev-ext) install_dev_ext ;;
         install-dev-llm) install_dev_llm ;;
 		install-utils) brew install "${utils[@]}" ;;
         config-system) config_system ;;
