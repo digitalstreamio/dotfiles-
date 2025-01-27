@@ -19,6 +19,7 @@ apps=(
     lm-studio
     ollamac
     # utils
+    alacritty
     keepassxc
     menumeters
     rectangle
@@ -33,8 +34,6 @@ apps=(
 appstore=(
     # DaVinci Resolve
     571213070
-    # iMovie
-    408981434 
     # Wireguard
     1441195209
     # Xcode
@@ -56,7 +55,6 @@ utils=(
     fd
     fzf
     just
-    procs
     ripgrep
     sd
     tealdeer
@@ -76,8 +74,6 @@ dev=(
     # build
     cmake
     coursier
-    maven
-    ninja
     pnpm
     sbt
     # llm
@@ -87,10 +83,10 @@ dev=(
     fabric
     helm
 	k9s
+	opentofu
     podman
     podman-compose
     qemu
-    terraform
     # tools
     git
     gitui
@@ -103,8 +99,7 @@ dev=(
 )
 
 dev_llm=(
-    llama3.1:8b-instruct-q8_0
-    phi4:14b
+    llama3.1:8b-instruct-q6_0
 )
 
 install_dev_llm() {
