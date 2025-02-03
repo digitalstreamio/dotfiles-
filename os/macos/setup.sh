@@ -7,17 +7,14 @@ apps=(
     nheko
     zoom
     # media
-    freetube
     spotify
     calibre
-    gyroflow
     handbrake
     iina
     # productivity
     obsidian
     chatgpt
     lm-studio
-    ollamac
     # utils
     alacritty
     keepassxc
@@ -77,7 +74,7 @@ dev=(
     pnpm
     sbt
     # llm
-    ollama
+    huggingface-cli
     # ops
     ansible
     fabric
@@ -91,29 +88,35 @@ dev=(
     git
     gitui
     git-delta
-    ipython
+    pipx
     telnet
     tokei
     wrk
     zerotier-one
 )
 
-dev_llm=(
-    llama3.1:8b-instruct-q6_0
+pipx=(
+	aider-chat
+	mlx-lm
 )
 
-install_dev_llm() {
+llm_lms=(
+	lmstudio-community/DeepSeek-R1-Distill-Qwen-32B-GGUF@Q4_K_M
+	lmstudio-community/Mistral-Small-24B-Instruct-2501-GGUF@Q8_0
+)
+
+# pipx install aider-chat --python /opt/homebrew/bin/python3.12
+
+install_llm() {
     if command -v code &> /dev/null; then
-        for model in "${dev_llm[@]}"; do
-            ollama pull $model
+        for model in "${llm_lms[@]}"; do
+            lms get $model
         done
     fi
 }
 
 config_system() {
-    sudo systemsetup -settimezone "America/New_York" > /dev/null
     sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist
-    sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
     disable_spotlight
 }
 
@@ -132,7 +135,7 @@ config_user() {
     defaults write com.apple.Dock autohide-delay -float 0.1
     defaults write com.apple.Dock autohide-time-modifier -float 0.5
     defaults write com.apple.Dock show-process-indicators -bool true
-    defaults write com.apple.Dock wvous-bl-corner -int 1
+    defaults write com.apple.Dock wvous-bl-corner -int 11
     defaults write com.apple.dock wvous-bl-modifier -int 0
     defaults write com.apple.Dock wvous-br-corner -int 1
     defaults write com.apple.dock wvous-br-modifier -int 0
@@ -140,25 +143,6 @@ config_user() {
     defaults write com.apple.dock wvous-tl-modifier -int 0
     defaults write com.apple.Dock wvous-tr-corner -int 1
     defaults write com.apple.dock wvous-tr-modifier -int 0
-    # Finder
-    defaults write com.apple.finder _FXSortFoldersFirst -bool true
-    defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-    defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
-    defaults write com.apple.finder NewWindowTargetPath -string "file:///${HOME}/";
-    defaults write com.apple.finder QuitMenuItem -bool true
-    defaults write com.apple.finder ShowPathbar -bool false
-    defaults write com.apple.finder ShowStatusBar -bool false
-    # Shortcuts
-    defaults write org.mozilla.firefox NSUserKeyEquivalents -dict \
-        "New Tab" "^t" \
-        "New Window" "^n" \
-        "New Private Window" "^\$n" \
-        "Close Tab" "^w" \
-        "Close Window" "^\$w" \
-        "Find in Page..." "^f" \
-        "Find Again" "^g" 
-
-    chsh -s /opt/homebrew/bin/fish
     
     disable_siri
 }
@@ -180,6 +164,8 @@ disable_siri() {
     launchctl disable "gui/$UID/com.apple.assistantd"
     launchctl disable "user/$UID/com.apple.Siri.agent"
     launchctl disable "gui/$UID/com.apple.Siri.agent"
+    launchctl disable "user/$UID/com.apple.SiriTTSTrainingAgent"
+    launchctl disable "gui/$UID/com.apple.SiriTTSTrainingAgent"    
     #sudo launchctl disable 'system/com.apple.assistantd'
     #sudo launchctl disable 'system/com.apple.Siri.agent'
 }
@@ -205,12 +191,12 @@ main() {
 		install-apps) brew install --cask "${apps[@]}" ;;
         install-appstore) mas install "${appstore[@]}" ;;
 		install-dev) brew install "${dev[@]}" ;;
-        install-dev-llm) install_dev_llm ;;
+        install-llm) install_llm ;;
 		install-utils) brew install "${utils[@]}" ;;
         config-system) config_system ;;
 		config-user) config_user ;;
         config-reset) config_reset ;;
-        show-status) show_status ;;
+        status) show_status ;;
 		*) echo "Invalid action ${1}!"; exit 1 ;;
 	esac
 }
