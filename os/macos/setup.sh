@@ -43,6 +43,7 @@ utils=(
     lf
     micro
     lnav
+    television
     # net
     croc
     rclone
@@ -50,8 +51,6 @@ utils=(
     # sys
     bat
     fd
-    fzf
-    just
     ripgrep
     sd
     tealdeer
@@ -88,6 +87,7 @@ dev=(
     git
     gitui
     git-delta
+    just
     pipx
     telnet
     tokei
